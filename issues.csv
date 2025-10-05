@@ -1,0 +1,3136 @@
+id,title,body,labels,milestone
+E1-F1-I1,E1-F1-I1: Define channel-agnostic ticket intake contract,"### Summary
+Define channel-agnostic ticket intake contract. Document request/response contracts for email, portal, chat widget, and API ticket creation with required/optional fields. Align intake contract with ticket field schema and tenant scoping rules. Secure sign-off from product and platform leads with ADR stored in internal knowledge base.
+
+### Scope
+- [ ] Document request/response contracts for email, portal, chat widget, and API ticket creation with required/optional fields.
+- [ ] Align intake contract with ticket field schema and tenant scoping rules.
+- [ ] Secure sign-off from product and platform leads with ADR stored in internal knowledge base.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: None",epic:TicketIntakeLifecycle;type:Analysis;priority:P0;area:Architecture,Week 1
+E1-F1-I2,E1-F1-I2: Implement ticket creation API & service layer,"### Summary
+Implement ticket creation API & service layer. Build Laravel controller/service that persists tickets for all channels using unified metadata. Validate payloads against contract and auto-link contacts when identifiers provided. Add PHPUnit coverage for success and failure flows across each channel type.
+
+### Scope
+- [ ] Build Laravel controller/service that persists tickets for all channels using unified metadata.
+- [ ] Validate payloads against contract and auto-link contacts when identifiers provided.
+- [ ] Add PHPUnit coverage for success and failure flows across each channel type.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F1-I1, E1-F3-I2",epic:TicketIntakeLifecycle;type:Implementation;priority:P0;area:Backend,Week 2
+E1-F1-I3,E1-F1-I3: Prototype chat widget submission flow,"### Summary
+Prototype chat widget submission flow. Deliver embeddable chat widget that authenticates visitor and submits via ticket creation API. Display success/error states and channel attribution in widget UI. Cypress test covers submission lifecycle against staging API.
+
+### Scope
+- [ ] Deliver embeddable chat widget that authenticates visitor and submits via ticket creation API.
+- [ ] Display success/error states and channel attribution in widget UI.
+- [ ] Cypress test covers submission lifecycle against staging API.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F1-I2",epic:TicketIntakeLifecycle;type:Implementation;priority:P1;area:Frontend,Week 3
+E1-F2-I1,E1-F2-I1: Model tenant and brand relationships,"### Summary
+Model tenant and brand relationships. Produce ER diagram and migration plan for organizations, brands, and ticket ownership. Document tenant resolution strategy (domain, API key, or header) and share with team. Validate model with sample data covering multi-brand organizations.
+
+### Scope
+- [ ] Produce ER diagram and migration plan for organizations, brands, and ticket ownership.
+- [ ] Document tenant resolution strategy (domain, API key, or header) and share with team.
+- [ ] Validate model with sample data covering multi-brand organizations.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F3-I1",epic:TicketIntakeLifecycle;type:Analysis;priority:P0;area:Architecture,Week 1
+E1-F2-I2,E1-F2-I2: Implement tenant scoping middleware & policies,"### Summary
+Implement tenant scoping middleware & policies. Middleware resolves tenant context per request and injects into ticket services. Authorization policies ensure tickets are only accessible within tenant scope. Feature tests prove cross-tenant isolation for CRUD endpoints.
+
+### Scope
+- [ ] Middleware resolves tenant context per request and injects into ticket services.
+- [ ] Authorization policies ensure tickets are only accessible within tenant scope.
+- [ ] Feature tests prove cross-tenant isolation for CRUD endpoints.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F2-I1",epic:TicketIntakeLifecycle;type:Implementation;priority:P0;area:Backend,Week 2
+E1-F2-I3,E1-F2-I3: Add tenant-aware ticket intake tests,"### Summary
+Add tenant-aware ticket intake tests. Write feature tests for API, portal, and chat intake enforcing tenant boundaries. Cover brand-alias routing and fallback tenant resolution. Tests run in CI with fixtures per tenant.
+
+### Scope
+- [ ] Write feature tests for API, portal, and chat intake enforcing tenant boundaries.
+- [ ] Cover brand-alias routing and fallback tenant resolution.
+- [ ] Tests run in CI with fixtures per tenant.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F2-I2, E1-F1-I2",epic:TicketIntakeLifecycle;type:Implementation;priority:P1;area:Backend,Week 3
+E1-F3-I1,E1-F3-I1: Create ticket schema migrations,"### Summary
+Create ticket schema migrations. Migrations establish tickets table with subject, status, priority, department, category, assignee, tags, and JSON custom_fields. Document indexing strategy for status/priority/tenant lookups. Migration suite passes locally with rollback verification.
+
+### Scope
+- [ ] Migrations establish tickets table with subject, status, priority, department, category, assignee, tags, and JSON custom_fields.
+- [ ] Document indexing strategy for status/priority/tenant lookups.
+- [ ] Migration suite passes locally with rollback verification.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: None",epic:TicketIntakeLifecycle;type:Implementation;priority:P0;area:Backend,Week 1
+E1-F3-I2,E1-F3-I2: Implement ticket domain model & repository,"### Summary
+Implement ticket domain model & repository. Configure Eloquent models with casts, accessors, and relationships for assignee, department, category. Repository/service exposes CRUD plus tag/custom-field helpers. Unit tests validate create/update with tag syncing and custom field persistence.
+
+### Scope
+- [ ] Configure Eloquent models with casts, accessors, and relationships for assignee, department, category.
+- [ ] Repository/service exposes CRUD plus tag/custom-field helpers.
+- [ ] Unit tests validate create/update with tag syncing and custom field persistence.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F3-I1",epic:TicketIntakeLifecycle;type:Implementation;priority:P0;area:Backend,Week 2
+E1-F3-I3,E1-F3-I3: Build custom field definition manager,"### Summary
+Build custom field definition manager. CRUD endpoints for defining custom fields (type, validation rules, tenant scope). Store per-tenant configurations and surface in ticket creation forms. Tests cover creation, update, deletion with validation failures.
+
+### Scope
+- [ ] CRUD endpoints for defining custom fields (type, validation rules, tenant scope).
+- [ ] Store per-tenant configurations and surface in ticket creation forms.
+- [ ] Tests cover creation, update, deletion with validation failures.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F3-I1",epic:TicketIntakeLifecycle;type:Implementation;priority:P0;area:Backend,Week 3
+E1-F4-I1,E1-F4-I1: Define workflow state machine requirements,"### Summary
+Define workflow state machine requirements. Document target states, transitions, and guards for default workflow. Capture tenant-level override requirements and SLA touchpoints. Share diagram reviewed by ops and product teams.
+
+### Scope
+- [ ] Document target states, transitions, and guards for default workflow.
+- [ ] Capture tenant-level override requirements and SLA touchpoints.
+- [ ] Share diagram reviewed by ops and product teams.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F3-I1",epic:TicketIntakeLifecycle;type:Analysis;priority:P1;area:Architecture,Week 2
+E1-F4-I2,E1-F4-I2: Implement configurable status engine,"### Summary
+Implement configurable status engine. Build state machine supporting tenant-specific status sets and transitions. Persist transition rules with validation for forbidden paths. Automated tests ensure invalid transitions throw domain exceptions.
+
+### Scope
+- [ ] Build state machine supporting tenant-specific status sets and transitions.
+- [ ] Persist transition rules with validation for forbidden paths.
+- [ ] Automated tests ensure invalid transitions throw domain exceptions.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F4-I1, E1-F3-I2",epic:TicketIntakeLifecycle;type:Implementation;priority:P0;area:Backend,Week 3
+E1-F4-I3,E1-F4-I3: Deliver admin UI for workflow management,"### Summary
+Deliver admin UI for workflow management. Filament admin pages allow CRUD of statuses and transition rules. Only Admin role can access workflow management UI. Dusk test covers creating status and seeing it available on ticket.
+
+### Scope
+- [ ] Filament admin pages allow CRUD of statuses and transition rules.
+- [ ] Only Admin role can access workflow management UI.
+- [ ] Dusk test covers creating status and seeing it available on ticket.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F4-I2, E2-F2-I2",epic:TicketIntakeLifecycle;type:Implementation;priority:P0;area:Frontend,Week 4
+E1-F5-I1,E1-F5-I1: Add message visibility support,"### Summary
+Add message visibility support. Messages table gains visibility enum with default public. Legacy data backfilled and validated for visibility setting. Tests cover visibility toggling and default behavior.
+
+### Scope
+- [ ] Messages table gains visibility enum with default public.
+- [ ] Legacy data backfilled and validated for visibility setting.
+- [ ] Tests cover visibility toggling and default behavior.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F3-I1",epic:TicketIntakeLifecycle;type:Implementation;priority:P0;area:Backend,Week 2
+E1-F5-I2,E1-F5-I2: Enforce note visibility permissions,"### Summary
+Enforce note visibility permissions. Policies prevent non-staff from reading internal notes across channels. Agents can create/edit internal notes with audit entries recorded. Tests assert unauthorized access returns 403.
+
+### Scope
+- [ ] Policies prevent non-staff from reading internal notes across channels.
+- [ ] Agents can create/edit internal notes with audit entries recorded.
+- [ ] Tests assert unauthorized access returns 403.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F5-I1, E2-F3-I3",epic:TicketIntakeLifecycle;type:Implementation;priority:P0;area:Backend,Week 3
+E1-F5-I3,E1-F5-I3: Update portals for note visibility UX,"### Summary
+Update portals for note visibility UX. Agent portal displays toggle for internal/public replies with clear indicators. Customer portal hides internal notes and surfaces public thread continuity. UI automation verifies toggled visibility persists.
+
+### Scope
+- [ ] Agent portal displays toggle for internal/public replies with clear indicators.
+- [ ] Customer portal hides internal notes and surfaces public thread continuity.
+- [ ] UI automation verifies toggled visibility persists.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F5-I2, E2-F2-I3",epic:TicketIntakeLifecycle;type:Implementation;priority:P1;area:Frontend,Week 4
+E1-F6-I1,E1-F6-I1: Design merge/split/link data strategy,"### Summary
+Design merge/split/link data strategy. Document relational model for parent/child tickets and duplicate links. Outline conflict resolution for fields (assignee, status, custom fields). Capture audit requirements for compliance review.
+
+### Scope
+- [ ] Document relational model for parent/child tickets and duplicate links.
+- [ ] Outline conflict resolution for fields (assignee, status, custom fields).
+- [ ] Capture audit requirements for compliance review.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F3-I1",epic:TicketIntakeLifecycle;type:Analysis;priority:P1;area:Architecture,Week 2
+E1-F6-I2,E1-F6-I2: Implement merge & split services with auditing,"### Summary
+Implement merge & split services with auditing. Service merges tickets preserving message history and logs actions. Split operation clones relevant messages with new ticket IDs. Tests validate merges, splits, and duplicate link creation.
+
+### Scope
+- [ ] Service merges tickets preserving message history and logs actions.
+- [ ] Split operation clones relevant messages with new ticket IDs.
+- [ ] Tests validate merges, splits, and duplicate link creation.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F6-I1, E2-F6-I2",epic:TicketIntakeLifecycle;type:Implementation;priority:P0;area:Backend,Week 4
+E1-F6-I3,E1-F6-I3: Provide merge/link management endpoints,"### Summary
+Provide merge/link management endpoints. API & UI allow agents to merge, split, and link/mark duplicates. Display merged ticket references within conversation timeline. E2E test validates agent flow from selection to confirmation.
+
+### Scope
+- [ ] API & UI allow agents to merge, split, and link/mark duplicates.
+- [ ] Display merged ticket references within conversation timeline.
+- [ ] E2E test validates agent flow from selection to confirmation.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F6-I2",epic:TicketIntakeLifecycle;type:Implementation;priority:P1;area:Frontend,Week 4
+E1-F7-I1,E1-F7-I1: Build bulk ticket selection endpoints,"### Summary
+Build bulk ticket selection endpoints. Endpoint accepts list or filter query to collect ticket IDs within tenant scope. Server-side validation rejects cross-tenant or unauthorized selections. Feature tests cover large selections and pagination.
+
+### Scope
+- [ ] Endpoint accepts list or filter query to collect ticket IDs within tenant scope.
+- [ ] Server-side validation rejects cross-tenant or unauthorized selections.
+- [ ] Feature tests cover large selections and pagination.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F3-I2, E1-F2-I2",epic:TicketIntakeLifecycle;type:Implementation;priority:P1;area:Backend,Week 3
+E1-F7-I2,E1-F7-I2: Implement bulk action handlers,"### Summary
+Implement bulk action handlers. Handlers execute assign, close, tag, and SLA update actions asynchronously. Jobs emit events for real-time updates and auditing hooks. Tests ensure partial failures report actionable errors.
+
+### Scope
+- [ ] Handlers execute assign, close, tag, and SLA update actions asynchronously.
+- [ ] Jobs emit events for real-time updates and auditing hooks.
+- [ ] Tests ensure partial failures report actionable errors.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F7-I1, E1-F4-I2",epic:TicketIntakeLifecycle;type:Implementation;priority:P1;area:Backend,Week 3
+E1-F7-I3,E1-F7-I3: Enforce permissions & audit for bulk ops,"### Summary
+Enforce permissions & audit for bulk ops. RBAC checks restrict bulk operations to authorized roles. Audit logs record actor, scope, and outcome for each bulk operation. Tests verify unauthorized attempts and audit persistence.
+
+### Scope
+- [ ] RBAC checks restrict bulk operations to authorized roles.
+- [ ] Audit logs record actor, scope, and outcome for each bulk operation.
+- [ ] Tests verify unauthorized attempts and audit persistence.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F7-I2, E2-F3-I3, E2-F6-I2",epic:TicketIntakeLifecycle;type:Implementation;priority:P1;area:Backend,Week 4
+E1-F8-I1,E1-F8-I1: Plan Echo channel strategy,"### Summary
+Plan Echo channel strategy. Document private/public channel naming, auth guards, and tenant scoping. Define event payload schema for ticket lifecycle events. Review plan with DevOps for scaling considerations.
+
+### Scope
+- [ ] Document private/public channel naming, auth guards, and tenant scoping.
+- [ ] Define event payload schema for ticket lifecycle events.
+- [ ] Review plan with DevOps for scaling considerations.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F3-I1",epic:TicketIntakeLifecycle;type:Analysis;priority:P1;area:Architecture,Week 2
+E1-F8-I2,E1-F8-I2: Broadcast ticket lifecycle events,"### Summary
+Broadcast ticket lifecycle events. Fire Echo events for ticket creation, updates, and replies with tenant scoping. Queue broadcasting jobs using Redis + Horizon configuration. Tests validate event payload and channel authorization.
+
+### Scope
+- [ ] Fire Echo events for ticket creation, updates, and replies with tenant scoping.
+- [ ] Queue broadcasting jobs using Redis + Horizon configuration.
+- [ ] Tests validate event payload and channel authorization.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F8-I1, E1-F3-I2",epic:TicketIntakeLifecycle;type:Implementation;priority:P0;area:Backend,Week 3
+E1-F8-I3,E1-F8-I3: Integrate Echo client subscriptions,"### Summary
+Integrate Echo client subscriptions. Agent and customer portals subscribe to relevant Echo channels. UI reflects real-time status, assignee, and reply updates without refresh. Cypress test validates broadcast reception and UI refresh.
+
+### Scope
+- [ ] Agent and customer portals subscribe to relevant Echo channels.
+- [ ] UI reflects real-time status, assignee, and reply updates without refresh.
+- [ ] Cypress test validates broadcast reception and UI refresh.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F8-I2",epic:TicketIntakeLifecycle;type:Implementation;priority:P1;area:Frontend,Week 4
+E2-F1-I1,E2-F1-I1: Model company and individual contacts,"### Summary
+Model company and individual contacts. Migrations create companies, individuals, and link to tenant/brand. Seeder provides sample data for dev environments. Tests cover relationship loading and cascading deletes.
+
+### Scope
+- [ ] Migrations create companies, individuals, and link to tenant/brand.
+- [ ] Seeder provides sample data for dev environments.
+- [ ] Tests cover relationship loading and cascading deletes.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: None",epic:ContactAccess;type:Implementation;priority:P0;area:Backend,Week 1
+E2-F1-I2,E2-F1-I2: Deliver contact CRUD interfaces,"### Summary
+Deliver contact CRUD interfaces. Filament admin pages and API endpoints enable create/update/delete of contacts. Validation handles duplicate emails and tenant uniqueness. Dusk/UI tests confirm basic CRUD flows.
+
+### Scope
+- [ ] Filament admin pages and API endpoints enable create/update/delete of contacts.
+- [ ] Validation handles duplicate emails and tenant uniqueness.
+- [ ] Dusk/UI tests confirm basic CRUD flows.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E2-F1-I1",epic:ContactAccess;type:Implementation;priority:P1;area:Frontend,Week 2
+E2-F1-I3,E2-F1-I3: Link contacts to tickets,"### Summary
+Link contacts to tickets. Ticket creation resolves contacts via email or explicit ID association. Support primary + secondary contacts per ticket. Feature tests cover association and retrieval in ticket views.
+
+### Scope
+- [ ] Ticket creation resolves contacts via email or explicit ID association.
+- [ ] Support primary + secondary contacts per ticket.
+- [ ] Feature tests cover association and retrieval in ticket views.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E2-F1-I2, E1-F3-I2",epic:ContactAccess;type:Implementation;priority:P1;area:Backend,Week 3
+E2-F2-I1,E2-F2-I1: Document role capability matrix,"### Summary
+Document role capability matrix. Capability matrix outlines create/read/update/delete per feature for each role. Stakeholder approval recorded with version-controlled document. Matrix accessible to engineering & support teams.
+
+### Scope
+- [ ] Capability matrix outlines create/read/update/delete per feature for each role.
+- [ ] Stakeholder approval recorded with version-controlled document.
+- [ ] Matrix accessible to engineering & support teams.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: None",epic:ContactAccess;type:Analysis;priority:P0;area:Product,Week 1
+E2-F2-I2,E2-F2-I2: Seed default roles and capabilities,"### Summary
+Seed default roles and capabilities. Seeder registers Admin, Agent, Viewer roles with baseline permissions. Seeder idempotent and safe for repeated deployments. PHPUnit tests confirm roles and permissions exist post-seed.
+
+### Scope
+- [ ] Seeder registers Admin, Agent, Viewer roles with baseline permissions.
+- [ ] Seeder idempotent and safe for repeated deployments.
+- [ ] PHPUnit tests confirm roles and permissions exist post-seed.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E2-F2-I1, E2-F3-I2",epic:ContactAccess;type:Implementation;priority:P0;area:Backend,Week 2
+E2-F2-I3,E2-F2-I3: Enforce role-based portal access,"### Summary
+Enforce role-based portal access. Middleware routes agents to agent workspace, viewers to limited view, admins to admin portal. Unauthorized route access redirected with clear messaging. Feature tests cover each role’s allowed and denied routes.
+
+### Scope
+- [ ] Middleware routes agents to agent workspace, viewers to limited view, admins to admin portal.
+- [ ] Unauthorized route access redirected with clear messaging.
+- [ ] Feature tests cover each role’s allowed and denied routes.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E2-F2-I2, E2-F3-I3",epic:ContactAccess;type:Implementation;priority:P0;area:Backend,Week 3
+E2-F3-I1,E2-F3-I1: Install and configure Spatie permissions,"### Summary
+Install and configure Spatie permissions. Package installed with config published and cache settings tuned for multi-tenant use. Migrations run to create roles/permissions tables. Smoke test ensures guards resolve for web and API contexts.
+
+### Scope
+- [ ] Package installed with config published and cache settings tuned for multi-tenant use.
+- [ ] Migrations run to create roles/permissions tables.
+- [ ] Smoke test ensures guards resolve for web and API contexts.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: None",epic:ContactAccess;type:Implementation;priority:P0;area:Backend,Week 1
+E2-F3-I2,E2-F3-I2: Define permission taxonomy,"### Summary
+Define permission taxonomy. Permissions enumerated for ticketing, contacts, automation, reporting, admin modules. Exported configuration consumed by seeders and policies. Tests assert permissions registered and retrievable.
+
+### Scope
+- [ ] Permissions enumerated for ticketing, contacts, automation, reporting, admin modules.
+- [ ] Exported configuration consumed by seeders and policies.
+- [ ] Tests assert permissions registered and retrievable.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E2-F3-I1",epic:ContactAccess;type:Implementation;priority:P0;area:Backend,Week 2
+E2-F3-I3,E2-F3-I3: Integrate policies and middleware checks,"### Summary
+Integrate policies and middleware checks. Policies applied to ticket, contact, workflow, and knowledge base controllers. Middleware enforces permission gates on routes. Feature tests confirm unauthorized requests return correct status codes.
+
+### Scope
+- [ ] Policies applied to ticket, contact, workflow, and knowledge base controllers.
+- [ ] Middleware enforces permission gates on routes.
+- [ ] Feature tests confirm unauthorized requests return correct status codes.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E2-F3-I2",epic:ContactAccess;type:Implementation;priority:P0;area:Backend,Week 3
+E2-F4-I1,E2-F4-I1: Design team data model,"### Summary
+Design team data model. Document team entity relationships with users, tenants, and tickets. Define assignment rules (round-robin, manual) and configuration options. Secure stakeholder approval on documented design.
+
+### Scope
+- [ ] Document team entity relationships with users, tenants, and tickets.
+- [ ] Define assignment rules (round-robin, manual) and configuration options.
+- [ ] Secure stakeholder approval on documented design.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E2-F1-I1",epic:ContactAccess;type:Analysis;priority:P1;area:Architecture,Week 2
+E2-F4-I2,E2-F4-I2: Implement team assignment workflows,"### Summary
+Implement team assignment workflows. Migrations/models for teams and memberships with tenant scoping. Service assigns tickets to teams based on configuration and escalations. Tests validate manual assignment and default routing.
+
+### Scope
+- [ ] Migrations/models for teams and memberships with tenant scoping.
+- [ ] Service assigns tickets to teams based on configuration and escalations.
+- [ ] Tests validate manual assignment and default routing.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E2-F4-I1, E2-F3-I3",epic:ContactAccess;type:Implementation;priority:P0;area:Backend,Week 3
+E2-F4-I3,E2-F4-I3: Provide team management dashboards,"### Summary
+Provide team management dashboards. Filament dashboard lists team workloads and reassignment controls. API endpoints expose team queues for agent workspace. UI tests verify dashboard permissions and data accuracy.
+
+### Scope
+- [ ] Filament dashboard lists team workloads and reassignment controls.
+- [ ] API endpoints expose team queues for agent workspace.
+- [ ] UI tests verify dashboard permissions and data accuracy.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E2-F4-I2",epic:ContactAccess;type:Implementation;priority:P1;area:Frontend,Week 4
+E2-F5-I1,E2-F5-I1: Extend ticket participant schema,"### Summary
+Extend ticket participant schema. Create pivot tables linking tickets to watcher users/contacts with tenant scope. Default watchers seeded from team membership where configured. Tests ensure watchers retrieve correctly via API.
+
+### Scope
+- [ ] Create pivot tables linking tickets to watcher users/contacts with tenant scope.
+- [ ] Default watchers seeded from team membership where configured.
+- [ ] Tests ensure watchers retrieve correctly via API.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F3-I1, E2-F1-I1",epic:ContactAccess;type:Implementation;priority:P1;area:Backend,Week 3
+E2-F5-I2,E2-F5-I2: Implement watcher notification preferences,"### Summary
+Implement watcher notification preferences. Store per-watcher preferences for email and real-time notifications. Integrate with broadcast events to honor preferences. Tests cover toggling preferences and verifying event delivery suppression.
+
+### Scope
+- [ ] Store per-watcher preferences for email and real-time notifications.
+- [ ] Integrate with broadcast events to honor preferences.
+- [ ] Tests cover toggling preferences and verifying event delivery suppression.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E2-F5-I1, E1-F8-I2",epic:ContactAccess;type:Implementation;priority:P1;area:Backend,Week 4
+E2-F5-I3,E2-F5-I3: Expose watcher management UI & API,"### Summary
+Expose watcher management UI & API. Agent UI and API endpoints allow adding/removing watchers with RBAC checks. Display watcher list with preference indicators in ticket view. Feature tests validate permission enforcement.
+
+### Scope
+- [ ] Agent UI and API endpoints allow adding/removing watchers with RBAC checks.
+- [ ] Display watcher list with preference indicators in ticket view.
+- [ ] Feature tests validate permission enforcement.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E2-F5-I2, E2-F3-I3",epic:ContactAccess;type:Implementation;priority:P1;area:Frontend,Week 4
+E2-F6-I1,E2-F6-I1: Define audit log taxonomy & retention,"### Summary
+Define audit log taxonomy & retention. Catalog auditable events across ticketing, contact, and security domains. Establish retention durations and purge strategy meeting compliance. Obtain approval from security officer and document in knowledge base.
+
+### Scope
+- [ ] Catalog auditable events across ticketing, contact, and security domains.
+- [ ] Establish retention durations and purge strategy meeting compliance.
+- [ ] Obtain approval from security officer and document in knowledge base.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: None",epic:ContactAccess;type:Analysis;priority:P1;area:Architecture,Week 2
+E2-F6-I2,E2-F6-I2: Implement audit logging pipeline,"### Summary
+Implement audit logging pipeline. Create models/migrations for audit entries keyed to tenant and actor. Hook lifecycle events (ticket create/update, role change, contact edits) to logging service. Tests confirm entries written with correct metadata.
+
+### Scope
+- [ ] Create models/migrations for audit entries keyed to tenant and actor.
+- [ ] Hook lifecycle events (ticket create/update, role change, contact edits) to logging service.
+- [ ] Tests confirm entries written with correct metadata.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E2-F6-I1",epic:ContactAccess;type:Implementation;priority:P0;area:Backend,Week 3
+E2-F6-I3,E2-F6-I3: Deliver org-level audit log views,"### Summary
+Deliver org-level audit log views. Admin UI lists audit events with filtering by date, actor, module. Provide CSV export for compliance teams. UI tests verify filtering and export permissions.
+
+### Scope
+- [ ] Admin UI lists audit events with filtering by date, actor, module.
+- [ ] Provide CSV export for compliance teams.
+- [ ] UI tests verify filtering and export permissions.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E2-F6-I2",epic:ContactAccess;type:Implementation;priority:P1;area:Frontend,Week 4
+E2-F7-I1,E2-F7-I1: Draft GDPR anonymization playbook,"### Summary
+Draft GDPR anonymization playbook. Map personal data fields across modules to anonymization/deletion strategies. Document legal hold scenarios and approval workflow. Receive compliance officer approval recorded in repository.
+
+### Scope
+- [ ] Map personal data fields across modules to anonymization/deletion strategies.
+- [ ] Document legal hold scenarios and approval workflow.
+- [ ] Receive compliance officer approval recorded in repository.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E2-F6-I1",epic:ContactAccess;type:Analysis;priority:P0;area:Compliance,Week 3
+E2-F7-I2,E2-F7-I2: Implement anonymization job for PII,"### Summary
+Implement anonymization job for PII. Queue job scrubs personal data from contacts/tickets per policy with retention overrides. Audit entries record anonymization actions per tenant. Automated tests validate anonymization across linked records.
+
+### Scope
+- [ ] Queue job scrubs personal data from contacts/tickets per policy with retention overrides.
+- [ ] Audit entries record anonymization actions per tenant.
+- [ ] Automated tests validate anonymization across linked records.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E2-F7-I1, E2-F6-I2",epic:ContactAccess;type:Implementation;priority:P0;area:Backend,Week 4
+E2-F7-I3,E2-F7-I3: Build deletion request workflow,"### Summary
+Build deletion request workflow. Customer portal form logs deletion requests with approval status tracking. Admin review process triggers anonymization job upon approval and records audit trail. Notifications dispatched to requester once processed.
+
+### Scope
+- [ ] Customer portal form logs deletion requests with approval status tracking.
+- [ ] Admin review process triggers anonymization job upon approval and records audit trail.
+- [ ] Notifications dispatched to requester once processed.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E2-F7-I2, E2-F6-I3",epic:ContactAccess;type:Implementation;priority:P1;area:Backend,Week 4
+E3-F1-I1,E3-F1-I1: Blueprint knowledge base taxonomy,"### Summary
+Blueprint knowledge base taxonomy. Produce ERD covering categories, articles, attachments, and tenant scoping. Define ordering, nesting limits, and orphan handling rules. Secure sign-off from product and content leads with ADR stored in repo.
+
+### Scope
+- [ ] Produce ERD covering categories, articles, attachments, and tenant scoping.
+- [ ] Define ordering, nesting limits, and orphan handling rules.
+- [ ] Secure sign-off from product and content leads with ADR stored in repo.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: None",epic:KnowledgeBase;type:Analysis;priority:P0;area:Architecture,Week 1
+E3-F1-I2,E3-F1-I2: Implement KB schema & models,"### Summary
+Implement KB schema & models. Create migrations/models for categories, articles, revisions, and tenant relations. Add policies ensuring tenant-restricted CRUD access. Unit tests cover hierarchy creation, reparenting, and soft deletes.
+
+### Scope
+- [ ] Create migrations/models for categories, articles, revisions, and tenant relations.
+- [ ] Add policies ensuring tenant-restricted CRUD access.
+- [ ] Unit tests cover hierarchy creation, reparenting, and soft deletes.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E3-F1-I1",epic:KnowledgeBase;type:Implementation;priority:P0;area:Backend,Week 2
+E3-F1-I3,E3-F1-I3: Build Filament management UI,"### Summary
+Build Filament management UI. Filament resources allow admins to manage categories and articles with drag/drop ordering. Enforce RBAC via Spatie so only permitted roles access KB management. Browser test confirms creation and rearrangement persists.
+
+### Scope
+- [ ] Filament resources allow admins to manage categories and articles with drag/drop ordering.
+- [ ] Enforce RBAC via Spatie so only permitted roles access KB management.
+- [ ] Browser test confirms creation and rearrangement persists.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E3-F1-I2, E2-F3-I3",epic:KnowledgeBase;type:Implementation;priority:P1;area:Frontend,Week 3
+E3-F2-I1,E3-F2-I1: Evaluate editor requirements & compliance,"### Summary
+Evaluate editor requirements & compliance. Compare top Laravel-friendly editors for accessibility, localization, and media controls. Document data retention/PII implications and required sanitization rules. Capture decision in ADR approved by security and content stakeholders.
+
+### Scope
+- [ ] Compare top Laravel-friendly editors for accessibility, localization, and media controls.
+- [ ] Document data retention/PII implications and required sanitization rules.
+- [ ] Capture decision in ADR approved by security and content stakeholders.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E3-F1-I1",epic:KnowledgeBase;type:Analysis;priority:P1;area:Product,Week 1
+E3-F2-I2,E3-F2-I2: Integrate editor into article forms,"### Summary
+Integrate editor into article forms. Embed chosen editor with server-side sanitization and validation hooks. Support image/file uploads stored per-tenant with signed URLs. Feature tests ensure content persists with formatting and media references.
+
+### Scope
+- [ ] Embed chosen editor with server-side sanitization and validation hooks.
+- [ ] Support image/file uploads stored per-tenant with signed URLs.
+- [ ] Feature tests ensure content persists with formatting and media references.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E3-F2-I1, E3-F1-I2",epic:KnowledgeBase;type:Implementation;priority:P0;area:Frontend,Week 2
+E3-F2-I3,E3-F2-I3: Implement media lifecycle management,"### Summary
+Implement media lifecycle management. Schedule cleanup job for orphaned media respecting retention policy. Generate responsive renditions and alt-text prompts for uploads. Tests verify cleanup skips referenced assets and logs actions.
+
+### Scope
+- [ ] Schedule cleanup job for orphaned media respecting retention policy.
+- [ ] Generate responsive renditions and alt-text prompts for uploads.
+- [ ] Tests verify cleanup skips referenced assets and logs actions.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E3-F2-I2",epic:KnowledgeBase;type:Implementation;priority:P1;area:Backend,Week 3
+E3-F3-I1,E3-F3-I1: Define slugging & routing strategy,"### Summary
+Define slugging & routing strategy. Specify slug pattern including locale, category path, and uniqueness handling. Outline redirect policy for slug changes with audit considerations. Document caching approach for public KB routes.
+
+### Scope
+- [ ] Specify slug pattern including locale, category path, and uniqueness handling.
+- [ ] Outline redirect policy for slug changes with audit considerations.
+- [ ] Document caching approach for public KB routes.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E3-F1-I1",epic:KnowledgeBase;type:Analysis;priority:P1;area:Architecture,Week 1
+E3-F3-I2,E3-F3-I2: Implement slug generation & resolution,"### Summary
+Implement slug generation & resolution. Add observers ensuring unique slugs per tenant and locale. Update routing to resolve nested slugs with fallback redirects. Automated tests cover creation, updates, and redirect responses.
+
+### Scope
+- [ ] Add observers ensuring unique slugs per tenant and locale.
+- [ ] Update routing to resolve nested slugs with fallback redirects.
+- [ ] Automated tests cover creation, updates, and redirect responses.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E3-F3-I1, E3-F1-I2",epic:KnowledgeBase;type:Implementation;priority:P1;area:Backend,Week 2
+E3-F3-I3,E3-F3-I3: Deliver SEO metadata enhancements,"### Summary
+Deliver SEO metadata enhancements. Inject canonical tags, structured data, and OpenGraph metadata per article. Generate sitemap including categories and localized articles. Cypress test verifies metadata output for sample articles.
+
+### Scope
+- [ ] Inject canonical tags, structured data, and OpenGraph metadata per article.
+- [ ] Generate sitemap including categories and localized articles.
+- [ ] Cypress test verifies metadata output for sample articles.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E3-F3-I2",epic:KnowledgeBase;type:Implementation;priority:P1;area:Frontend,Week 3
+E3-F4-I1,E3-F4-I1: Design feedback capture metrics,"### Summary
+Design feedback capture metrics. Define helpfulness scale, response throttling, and anonymity rules. Determine storage schema linking feedback to tenant, article, and locale. Secure approval from analytics and compliance reviewers.
+
+### Scope
+- [ ] Define helpfulness scale, response throttling, and anonymity rules.
+- [ ] Determine storage schema linking feedback to tenant, article, and locale.
+- [ ] Secure approval from analytics and compliance reviewers.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E3-F1-I1",epic:KnowledgeBase;type:Analysis;priority:P1;area:Product,Week 2
+E3-F4-I2,E3-F4-I2: Implement feedback API & storage,"### Summary
+Implement feedback API & storage. Build endpoints capturing votes with bot and duplicate protection. Persist feedback with timestamps and optional comment field. Feature tests validate rate limiting and tenant scoping.
+
+### Scope
+- [ ] Build endpoints capturing votes with bot and duplicate protection.
+- [ ] Persist feedback with timestamps and optional comment field.
+- [ ] Feature tests validate rate limiting and tenant scoping.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E3-F4-I1, E3-F1-I2",epic:KnowledgeBase;type:Implementation;priority:P1;area:Backend,Week 3
+E3-F4-I3,E3-F4-I3: Surface feedback insights in UI,"### Summary
+Surface feedback insights in UI. Public KB shows “Was this helpful?” widget with optimistic updates. Admin dashboard lists feedback metrics with filters by category and locale. UI tests confirm vote state, error handling, and analytics display.
+
+### Scope
+- [ ] Public KB shows “Was this helpful?” widget with optimistic updates.
+- [ ] Admin dashboard lists feedback metrics with filters by category and locale.
+- [ ] UI tests confirm vote state, error handling, and analytics display.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E3-F4-I2",epic:KnowledgeBase;type:Implementation;priority:P1;area:Frontend,Week 4
+E3-F5-I1,E3-F5-I1: Document localization governance,"### Summary
+Document localization governance. Specify supported locales per tenant, fallback rules, and translation workflow. Identify compliance requirements for localized content storage. Publish governance guide approved by localization lead.
+
+### Scope
+- [ ] Specify supported locales per tenant, fallback rules, and translation workflow.
+- [ ] Identify compliance requirements for localized content storage.
+- [ ] Publish governance guide approved by localization lead.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E3-F1-I1",epic:KnowledgeBase;type:Analysis;priority:P0;area:Architecture,Week 2
+E3-F5-I2,E3-F5-I2: Implement translation storage & APIs,"### Summary
+Implement translation storage & APIs. Extend article schema with locale-specific bodies, metadata, and status flags. APIs expose locale filters and fallback logic for portals. Tests confirm fallback to default locale and proper cache invalidation.
+
+### Scope
+- [ ] Extend article schema with locale-specific bodies, metadata, and status flags.
+- [ ] APIs expose locale filters and fallback logic for portals.
+- [ ] Tests confirm fallback to default locale and proper cache invalidation.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E3-F5-I1, E3-F1-I2",epic:KnowledgeBase;type:Implementation;priority:P0;area:Backend,Week 3
+E3-F5-I3,E3-F5-I3: Provide translation workflow UI,"### Summary
+Provide translation workflow UI. Admin UI supports translation assignment, status tracking, and side-by-side editing. Integrate WYSIWYG editor with locale switcher and glossary hints. Browser tests ensure translators only edit permitted locales.
+
+### Scope
+- [ ] Admin UI supports translation assignment, status tracking, and side-by-side editing.
+- [ ] Integrate WYSIWYG editor with locale switcher and glossary hints.
+- [ ] Browser tests ensure translators only edit permitted locales.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E3-F5-I2, E3-F2-I2",epic:KnowledgeBase;type:Implementation;priority:P1;area:Frontend,Week 4
+E3-F6-I1,E3-F6-I1: Plan Meilisearch deployment,"### Summary
+Plan Meilisearch deployment. Document cluster sizing, failover, and security controls for Meilisearch. Define sync cadence and index naming conventions per tenant. Capture cost estimate and obtain DevOps approval.
+
+### Scope
+- [ ] Document cluster sizing, failover, and security controls for Meilisearch.
+- [ ] Define sync cadence and index naming conventions per tenant.
+- [ ] Capture cost estimate and obtain DevOps approval.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E3-F1-I1",epic:KnowledgeBase;type:Analysis;priority:P1;area:DevOps,Week 2
+E3-F6-I2,E3-F6-I2: Index KB content with Scout,"### Summary
+Index KB content with Scout. Configure Laravel Scout with per-tenant filters and locale awareness. Implement incremental indexing on article publish/update events. Tests verify index payloads and search responses for sample tenants.
+
+### Scope
+- [ ] Configure Laravel Scout with per-tenant filters and locale awareness.
+- [ ] Implement incremental indexing on article publish/update events.
+- [ ] Tests verify index payloads and search responses for sample tenants.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E3-F6-I1, E3-F1-I2",epic:KnowledgeBase;type:Implementation;priority:P0;area:Backend,Week 3
+E3-F6-I3,E3-F6-I3: Deliver unified KB search experience,"### Summary
+Deliver unified KB search experience. Customer portal offers predictive search with typo tolerance and locale filters. Analytics capture top queries and zero-result events for reporting. Cypress test validates search suggestions and result relevance.
+
+### Scope
+- [ ] Customer portal offers predictive search with typo tolerance and locale filters.
+- [ ] Analytics capture top queries and zero-result events for reporting.
+- [ ] Cypress test validates search suggestions and result relevance.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E3-F6-I2",epic:KnowledgeBase;type:Implementation;priority:P1;area:Frontend,Week 4
+E4-F1-I1,E4-F1-I1: Document automation triggers & payloads,"### Summary
+Document automation triggers & payloads. Catalog supported events (ticket.created, message.sent, SLA triggers) with payload schemas. Define guardrails for recursive execution and rate limiting. Publish event reference approved by platform architects.
+
+### Scope
+- [ ] Catalog supported events (ticket.created, message.sent, SLA triggers) with payload schemas.
+- [ ] Define guardrails for recursive execution and rate limiting.
+- [ ] Publish event reference approved by platform architects.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F8-I1",epic:AutomationSLA;type:Analysis;priority:P0;area:Architecture,Week 1
+E4-F1-I2,E4-F1-I2: Implement automation rule engine,"### Summary
+Implement automation rule engine. Create rule definitions with conditions, actions, and tenant scoping. Execute rules asynchronously with idempotency safeguards. PHPUnit suite covers matching logic, action execution, and failure reporting.
+
+### Scope
+- [ ] Create rule definitions with conditions, actions, and tenant scoping.
+- [ ] Execute rules asynchronously with idempotency safeguards.
+- [ ] PHPUnit suite covers matching logic, action execution, and failure reporting.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E4-F1-I1, E1-F3-I2",epic:AutomationSLA;type:Implementation;priority:P0;area:Backend,Week 2
+E4-F1-I3,E4-F1-I3: Build rule designer UI,"### Summary
+Build rule designer UI. Admin UI allows drag-and-drop condition/action composition with validation. Integrate preview/simulation mode logging potential actions. Browser tests ensure RBAC enforcement and rule persistence.
+
+### Scope
+- [ ] Admin UI allows drag-and-drop condition/action composition with validation.
+- [ ] Integrate preview/simulation mode logging potential actions.
+- [ ] Browser tests ensure RBAC enforcement and rule persistence.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E4-F1-I2, E2-F3-I3",epic:AutomationSLA;type:Implementation;priority:P1;area:Frontend,Week 3
+E4-F2-I1,E4-F2-I1: Outline macro governance & library,"### Summary
+Outline macro governance & library. Define macro types (response, workflow) and publishing workflow. Document versioning and localization expectations. Obtain approvals from support enablement and compliance teams.
+
+### Scope
+- [ ] Define macro types (response, workflow) and publishing workflow.
+- [ ] Document versioning and localization expectations.
+- [ ] Obtain approvals from support enablement and compliance teams.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E4-F1-I1",epic:AutomationSLA;type:Analysis;priority:P1;area:Product,Week 2
+E4-F2-I2,E4-F2-I2: Implement macro execution service,"### Summary
+Implement macro execution service. Persist macros with parameter placeholders and role restrictions. Allow execution from tickets with audit entries and undo support. Tests cover placeholder resolution, authorization, and rollback path.
+
+### Scope
+- [ ] Persist macros with parameter placeholders and role restrictions.
+- [ ] Allow execution from tickets with audit entries and undo support.
+- [ ] Tests cover placeholder resolution, authorization, and rollback path.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E4-F2-I1, E4-F1-I2",epic:AutomationSLA;type:Implementation;priority:P1;area:Backend,Week 3
+E4-F2-I3,E4-F2-I3: Deliver macro management UI,"### Summary
+Deliver macro management UI. Admin interface supports macro CRUD, preview, and publishing workflow. Agent workspace exposes macro picker with search and filters. UI tests verify permissions and execution telemetry capture.
+
+### Scope
+- [ ] Admin interface supports macro CRUD, preview, and publishing workflow.
+- [ ] Agent workspace exposes macro picker with search and filters.
+- [ ] UI tests verify permissions and execution telemetry capture.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E4-F2-I2, E2-F3-I3",epic:AutomationSLA;type:Implementation;priority:P1;area:Frontend,Week 4
+E4-F3-I1,E4-F3-I1: Define SLA policy schema,"### Summary
+Define SLA policy schema. Document SLA targets for first response/resolution with tenant overrides. Specify calendar/business hour integration requirements. Secure sign-off from customer success leadership.
+
+### Scope
+- [ ] Document SLA targets for first response/resolution with tenant overrides.
+- [ ] Specify calendar/business hour integration requirements.
+- [ ] Secure sign-off from customer success leadership.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F3-I1",epic:AutomationSLA;type:Analysis;priority:P0;area:Architecture,Week 1
+E4-F3-I2,E4-F3-I2: Implement SLA tracking engine,"### Summary
+Implement SLA tracking engine. Track SLA timers per ticket with pause/resume on status changes. Persist milestone timestamps and remaining time calculations. Unit tests validate timer lifecycle across workflows.
+
+### Scope
+- [ ] Track SLA timers per ticket with pause/resume on status changes.
+- [ ] Persist milestone timestamps and remaining time calculations.
+- [ ] Unit tests validate timer lifecycle across workflows.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E4-F3-I1, E1-F3-I2",epic:AutomationSLA;type:Implementation;priority:P0;area:Backend,Week 2
+E4-F3-I3,E4-F3-I3: Provide SLA configuration UI,"### Summary
+Provide SLA configuration UI. Admin UI manages SLA policies, calendars, and assignment to ticket queues. Display SLA previews indicating breach thresholds. Browser tests ensure validations and RBAC coverage.
+
+### Scope
+- [ ] Admin UI manages SLA policies, calendars, and assignment to ticket queues.
+- [ ] Display SLA previews indicating breach thresholds.
+- [ ] Browser tests ensure validations and RBAC coverage.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E4-F3-I2, E2-F3-I3",epic:AutomationSLA;type:Implementation;priority:P1;area:Frontend,Week 3
+E4-F4-I1,E4-F4-I1: Model breach detection thresholds,"### Summary
+Model breach detection thresholds. Define breach stages (warning, critical) and alert cadence. Map notification channels (email, Slack, in-app) to escalation paths. Document data retention for alert history.
+
+### Scope
+- [ ] Define breach stages (warning, critical) and alert cadence.
+- [ ] Map notification channels (email, Slack, in-app) to escalation paths.
+- [ ] Document data retention for alert history.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E4-F3-I1",epic:AutomationSLA;type:Analysis;priority:P1;area:Architecture,Week 2
+E4-F4-I2,E4-F4-I2: Implement SLA monitoring jobs,"### Summary
+Implement SLA monitoring jobs. Scheduled jobs evaluate SLA timers and emit breach events. Ensure jobs are multi-tenant aware with Horizon metrics. Tests cover breach detection, suppression windows, and retry behavior.
+
+### Scope
+- [ ] Scheduled jobs evaluate SLA timers and emit breach events.
+- [ ] Ensure jobs are multi-tenant aware with Horizon metrics.
+- [ ] Tests cover breach detection, suppression windows, and retry behavior.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E4-F4-I1, E4-F3-I2",epic:AutomationSLA;type:Implementation;priority:P0;area:Backend,Week 3
+E4-F4-I3,E4-F4-I3: Configure alert delivery channels,"### Summary
+Configure alert delivery channels. Route breach events to email, Slack/MS Teams, and in-app notifications honoring preferences. Provide audit trail entries for each alert delivery attempt. Integration tests validate payloads across channels and failure handling.
+
+### Scope
+- [ ] Route breach events to email, Slack/MS Teams, and in-app notifications honoring preferences.
+- [ ] Provide audit trail entries for each alert delivery attempt.
+- [ ] Integration tests validate payloads across channels and failure handling.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E4-F4-I2, E1-F8-I2",epic:AutomationSLA;type:Implementation;priority:P1;area:Backend,Week 4
+E4-F5-I1,E4-F5-I1: Define escalation matrix & ownership,"### Summary
+Define escalation matrix & ownership. Map escalation levels to teams, roles, and notification targets. Document triggering conditions (SLA breaches, sentiment shifts). Obtain sign-off from support operations and compliance.
+
+### Scope
+- [ ] Map escalation levels to teams, roles, and notification targets.
+- [ ] Document triggering conditions (SLA breaches, sentiment shifts).
+- [ ] Obtain sign-off from support operations and compliance.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E4-F3-I1, E2-F4-I1",epic:AutomationSLA;type:Analysis;priority:P1;area:Product,Week 2
+E4-F5-I2,E4-F5-I2: Implement escalation pipeline,"### Summary
+Implement escalation pipeline. Create workflow to reassign tickets, notify stakeholders, and adjust priority. Prevent duplicate escalations with locking and audit logging. Tests simulate multi-level escalations and verify permission checks.
+
+### Scope
+- [ ] Create workflow to reassign tickets, notify stakeholders, and adjust priority.
+- [ ] Prevent duplicate escalations with locking and audit logging.
+- [ ] Tests simulate multi-level escalations and verify permission checks.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E4-F5-I1, E4-F4-I2",epic:AutomationSLA;type:Implementation;priority:P0;area:Backend,Week 3
+E4-F5-I3,E4-F5-I3: Provide escalation oversight dashboard,"### Summary
+Provide escalation oversight dashboard. Dashboard lists active escalations with SLA status, owners, and action history. Offer filters by tenant, team, and escalation level with export. UI tests confirm visibility restrictions and data freshness.
+
+### Scope
+- [ ] Dashboard lists active escalations with SLA status, owners, and action history.
+- [ ] Offer filters by tenant, team, and escalation level with export.
+- [ ] UI tests confirm visibility restrictions and data freshness.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E4-F5-I2",epic:AutomationSLA;type:Implementation;priority:P1;area:Frontend,Week 4
+E5-F1-I1,E5-F1-I1: Assess summarization data & privacy,"### Summary
+Assess summarization data & privacy. Inventory ticket data fields eligible for AI ingestion with privacy annotations. Define retention, redaction, and opt-out policies aligned with GDPR. Record model selection rationale and approval from legal/compliance.
+
+### Scope
+- [ ] Inventory ticket data fields eligible for AI ingestion with privacy annotations.
+- [ ] Define retention, redaction, and opt-out policies aligned with GDPR.
+- [ ] Record model selection rationale and approval from legal/compliance.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E2-F7-I1",epic:AIAssistance;type:Analysis;priority:P0;area:Product,Week 1
+E5-F1-I2,E5-F1-I2: Implement summarization service,"### Summary
+Implement summarization service. Integrate chosen LLM/provider with queue-based processing and retries. Store summaries with versioning and manual override support. Tests validate summary quality checks, fallbacks, and timeout handling.
+
+### Scope
+- [ ] Integrate chosen LLM/provider with queue-based processing and retries.
+- [ ] Store summaries with versioning and manual override support.
+- [ ] Tests validate summary quality checks, fallbacks, and timeout handling.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E5-F1-I1, E1-F3-I2",epic:AIAssistance;type:Implementation;priority:P0;area:Backend,Week 2
+E5-F1-I3,E5-F1-I3: Expose summaries in agent workspace,"### Summary
+Expose summaries in agent workspace. Agent UI surfaces latest summary with refresh controls and feedback buttons. Real-time updates broadcast on summary refresh events. UI tests confirm permissions, refresh, and audit logging.
+
+### Scope
+- [ ] Agent UI surfaces latest summary with refresh controls and feedback buttons.
+- [ ] Real-time updates broadcast on summary refresh events.
+- [ ] UI tests confirm permissions, refresh, and audit logging.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E5-F1-I2, E1-F8-I2",epic:AIAssistance;type:Implementation;priority:P1;area:Frontend,Week 3
+E5-F2-I1,E5-F2-I1: Define suggestion datasets & guardrails,"### Summary
+Define suggestion datasets & guardrails. Document training/finetuning data sources with anonymization strategy. Establish guardrails for tone, compliance, and sensitive topics. Approval captured from customer success, legal, and security teams.
+
+### Scope
+- [ ] Document training/finetuning data sources with anonymization strategy.
+- [ ] Establish guardrails for tone, compliance, and sensitive topics.
+- [ ] Approval captured from customer success, legal, and security teams.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E5-F1-I1",epic:AIAssistance;type:Analysis;priority:P0;area:Product,Week 2
+E5-F2-I2,E5-F2-I2: Build suggested reply service,"### Summary
+Build suggested reply service. Generate top-N reply suggestions per ticket context with confidence scoring. Provide API for agent workspace with latency SLAs. Tests cover context assembly, caching, and fallback responses.
+
+### Scope
+- [ ] Generate top-N reply suggestions per ticket context with confidence scoring.
+- [ ] Provide API for agent workspace with latency SLAs.
+- [ ] Tests cover context assembly, caching, and fallback responses.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E5-F2-I1, E5-F1-I2",epic:AIAssistance;type:Implementation;priority:P0;area:Backend,Week 3
+E5-F2-I3,E5-F2-I3: Capture agent feedback loop,"### Summary
+Capture agent feedback loop. Record accept/reject/edited signals linked to model version and tenant. Feed feedback into monitoring dashboards and retraining datasets. Tests ensure audit logging and RBAC constraints for feedback access.
+
+### Scope
+- [ ] Record accept/reject/edited signals linked to model version and tenant.
+- [ ] Feed feedback into monitoring dashboards and retraining datasets.
+- [ ] Tests ensure audit logging and RBAC constraints for feedback access.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E5-F2-I2, E2-F6-I2",epic:AIAssistance;type:Implementation;priority:P1;area:Backend,Week 4
+E5-F3-I1,E5-F3-I1: Document sentiment analysis approach,"### Summary
+Document sentiment analysis approach. Define sentiment scale, thresholds, and language coverage. Determine data privacy measures for storing sentiment metadata. Gain approvals from analytics and compliance stakeholders.
+
+### Scope
+- [ ] Define sentiment scale, thresholds, and language coverage.
+- [ ] Determine data privacy measures for storing sentiment metadata.
+- [ ] Gain approvals from analytics and compliance stakeholders.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E5-F1-I1",epic:AIAssistance;type:Analysis;priority:P1;area:Product,Week 2
+E5-F3-I2,E5-F3-I2: Integrate sentiment scoring pipeline,"### Summary
+Integrate sentiment scoring pipeline. Process incoming messages with asynchronous scoring and caching. Persist sentiment timeline per ticket for trend analysis. Tests validate scoring accuracy thresholds and error handling.
+
+### Scope
+- [ ] Process incoming messages with asynchronous scoring and caching.
+- [ ] Persist sentiment timeline per ticket for trend analysis.
+- [ ] Tests validate scoring accuracy thresholds and error handling.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E5-F3-I1, E5-F1-I2",epic:AIAssistance;type:Implementation;priority:P1;area:Backend,Week 3
+E5-F3-I3,E5-F3-I3: Visualize sentiment insights,"### Summary
+Visualize sentiment insights. Agent UI displays sentiment timeline, alerts on negative trends, and filters. Broadcast updates on new sentiment scores without page refresh. UI tests confirm accessibility and cross-tenant isolation.
+
+### Scope
+- [ ] Agent UI displays sentiment timeline, alerts on negative trends, and filters.
+- [ ] Broadcast updates on new sentiment scores without page refresh.
+- [ ] UI tests confirm accessibility and cross-tenant isolation.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E5-F3-I2, E1-F8-I2",epic:AIAssistance;type:Implementation;priority:P1;area:Frontend,Week 4
+E5-F4-I1,E5-F4-I1: Outline taxonomy & training corpus,"### Summary
+Outline taxonomy & training corpus. Collaborate with product to define tag taxonomy per tenant/brand. Identify labeled datasets and synthetic data augmentation strategy. Capture approval from knowledge management and compliance.
+
+### Scope
+- [ ] Collaborate with product to define tag taxonomy per tenant/brand.
+- [ ] Identify labeled datasets and synthetic data augmentation strategy.
+- [ ] Capture approval from knowledge management and compliance.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E5-F2-I1",epic:AIAssistance;type:Analysis;priority:P1;area:Product,Week 2
+E5-F4-I2,E5-F4-I2: Implement classification workflow,"### Summary
+Implement classification workflow. Run classification asynchronously with confidence thresholds and fallback. Sync predicted tags to ticket model with audit trail entries. Tests ensure multi-label support, manual override, and rollback.
+
+### Scope
+- [ ] Run classification asynchronously with confidence thresholds and fallback.
+- [ ] Sync predicted tags to ticket model with audit trail entries.
+- [ ] Tests ensure multi-label support, manual override, and rollback.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E5-F4-I1, E5-F1-I2",epic:AIAssistance;type:Implementation;priority:P0;area:Backend,Week 3
+E5-F4-I3,E5-F4-I3: Monitor model health & drift,"### Summary
+Monitor model health & drift. Instrument dashboards tracking precision/recall, drift, and data freshness. Configure alerting when metrics breach guardrails or data ingestion stalls. Tests validate metric collection, alert thresholds, and RBAC on dashboards.
+
+### Scope
+- [ ] Instrument dashboards tracking precision/recall, drift, and data freshness.
+- [ ] Configure alerting when metrics breach guardrails or data ingestion stalls.
+- [ ] Tests validate metric collection, alert thresholds, and RBAC on dashboards.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E5-F4-I2, E2-F6-I2",epic:AIAssistance;type:Implementation;priority:P1;area:DevOps,Week 4
+E6-F1-I1,E6-F1-I1: Document mailbox ingestion architecture,"### Summary
+Document mailbox ingestion architecture. Produce technical brief detailing tenant-specific mailbox routing, authentication (OAuth2, app passwords), and connection pooling. Define ingestion cadence, attachment handling limits, and retry/acknowledgement strategy aligned with ticket schema. Secure approvals from security and platform leads with ADR committed to repo.
+
+### Scope
+- [ ] Produce technical brief detailing tenant-specific mailbox routing, authentication (OAuth2, app passwords), and connection pooling.
+- [ ] Define ingestion cadence, attachment handling limits, and retry/acknowledgement strategy aligned with ticket schema.
+- [ ] Secure approvals from security and platform leads with ADR committed to repo.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F3-I1",epic:EmailOps;type:Analysis;priority:P0;area:Architecture,Week 1
+E6-F1-I2,E6-F1-I2: Implement IMAP polling & parsing service,"### Summary
+Implement IMAP polling & parsing service. Build Horizon-queued job that connects to configured IMAP inboxes, normalizes messages, and creates/updates tickets via intake service. Support multi-part messages, attachment persistence, and contact resolution within tenant scope. PHPUnit coverage spans success, dedupe, and error flows with mocked mailboxes.
+
+### Scope
+- [ ] Build Horizon-queued job that connects to configured IMAP inboxes, normalizes messages, and creates/updates tickets via intake service.
+- [ ] Support multi-part messages, attachment persistence, and contact resolution within tenant scope.
+- [ ] PHPUnit coverage spans success, dedupe, and error flows with mocked mailboxes.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E6-F1-I1, E1-F1-I2, E1-F3-I2",epic:EmailOps;type:Implementation;priority:P0;area:Backend,Week 2
+E6-F1-I3,E6-F1-I3: Add ingestion observability & alerting,"### Summary
+Add ingestion observability & alerting. Expose metrics for mailbox latency, failure rates, and backlog via observability stack. Configure alerts for authentication failures, quota errors, and repeated parsing issues. Persist audit entries for ingestion errors tied to tenant and mailbox identifier.
+
+### Scope
+- [ ] Expose metrics for mailbox latency, failure rates, and backlog via observability stack.
+- [ ] Configure alerts for authentication failures, quota errors, and repeated parsing issues.
+- [ ] Persist audit entries for ingestion errors tied to tenant and mailbox identifier.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E6-F1-I2, E2-F6-I2",epic:EmailOps;type:Implementation;priority:P1;area:DevOps,Week 3
+E6-F2-I1,E6-F2-I1: Define outbound delivery configuration model,"### Summary
+Define outbound delivery configuration model. Document per-tenant SMTP settings, credential storage (KMS/Secrets), and DKIM/SPF alignment requirements. Outline rate limiting, suppression lists, and bounce classification strategy. Gain approvals from compliance and infrastructure stakeholders with record stored in knowledge base.
+
+### Scope
+- [ ] Document per-tenant SMTP settings, credential storage (KMS/Secrets), and DKIM/SPF alignment requirements.
+- [ ] Outline rate limiting, suppression lists, and bounce classification strategy.
+- [ ] Gain approvals from compliance and infrastructure stakeholders with record stored in knowledge base.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E6-F1-I1",epic:EmailOps;type:Analysis;priority:P0;area:Architecture,Week 1
+E6-F2-I2,E6-F2-I2: Build SMTP dispatch pipeline,"### Summary
+Build SMTP dispatch pipeline. Implement queued mail dispatch supporting templated and ad-hoc messages with attachment streaming. Capture provider response metadata (Message-ID, status) and associate with ticket thread. Automated tests cover success, transient failure retries, and tenant-specific throttling.
+
+### Scope
+- [ ] Implement queued mail dispatch supporting templated and ad-hoc messages with attachment streaming.
+- [ ] Capture provider response metadata (Message-ID, status) and associate with ticket thread.
+- [ ] Automated tests cover success, transient failure retries, and tenant-specific throttling.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E6-F2-I1, E1-F5-I1",epic:EmailOps;type:Implementation;priority:P0;area:Backend,Week 2
+E6-F2-I3,E6-F2-I3: Implement bounce & deliverability monitoring,"### Summary
+Implement bounce & deliverability monitoring. Ingest bounce/complaint webhooks to update ticket state, notify agents, and adjust suppression lists. Surface deliverability dashboards with trend metrics per brand. Log deliverability events into audit system with remediation guidance.
+
+### Scope
+- [ ] Ingest bounce/complaint webhooks to update ticket state, notify agents, and adjust suppression lists.
+- [ ] Surface deliverability dashboards with trend metrics per brand.
+- [ ] Log deliverability events into audit system with remediation guidance.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E6-F2-I2, E2-F6-I2",epic:EmailOps;type:Implementation;priority:P1;area:Backend,Week 3
+E6-F3-I1,E6-F3-I1: Map threading identifiers to ticket timeline,"### Summary
+Map threading identifiers to ticket timeline. Document usage of Message-ID, In-Reply-To, and References headers for thread association across tenants. Define fallback heuristics for providers lacking threading headers and collision handling rules. Share spec with ticketing squad and archive approved ADR.
+
+### Scope
+- [ ] Document usage of Message-ID, In-Reply-To, and References headers for thread association across tenants.
+- [ ] Define fallback heuristics for providers lacking threading headers and collision handling rules.
+- [ ] Share spec with ticketing squad and archive approved ADR.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E6-F1-I1, E6-F2-I1",epic:EmailOps;type:Analysis;priority:P1;area:Architecture,Week 1
+E6-F3-I2,E6-F3-I2: Implement bidirectional thread reconciliation,"### Summary
+Implement bidirectional thread reconciliation. Update ingestion and dispatch services to persist threading metadata and prevent duplicate ticket creation. Synchronize outbound replies with correct References headers and status updates. Tests validate threading for forwarded, replied, and CC scenarios across tenants.
+
+### Scope
+- [ ] Update ingestion and dispatch services to persist threading metadata and prevent duplicate ticket creation.
+- [ ] Synchronize outbound replies with correct References headers and status updates.
+- [ ] Tests validate threading for forwarded, replied, and CC scenarios across tenants.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E6-F3-I1, E6-F1-I2, E6-F2-I2",epic:EmailOps;type:Implementation;priority:P0;area:Backend,Week 2
+E6-F3-I3,E6-F3-I3: Enhance portals with threaded email context,"### Summary
+Enhance portals with threaded email context. Agent and customer portals display email thread metadata, including external recipients and reply indicators. Real-time updates refresh thread view upon new email events via Echo. Cypress test covers reply send, inbound reception, and thread ordering.
+
+### Scope
+- [ ] Agent and customer portals display email thread metadata, including external recipients and reply indicators.
+- [ ] Real-time updates refresh thread view upon new email events via Echo.
+- [ ] Cypress test covers reply send, inbound reception, and thread ordering.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E6-F3-I2, E1-F8-I2",epic:EmailOps;type:Implementation;priority:P1;area:Frontend,Week 3
+E6-F4-I1,E6-F4-I1: Catalog template variables & localization rules,"### Summary
+Catalog template variables & localization rules. Produce dictionary of allowable placeholders spanning ticket, contact, SLA, and brand data with locale annotations. Define validation rules for required placeholders per template type and tenant overrides. Obtain approvals from support operations and localization stakeholders with documentation committed.
+
+### Scope
+- [ ] Produce dictionary of allowable placeholders spanning ticket, contact, SLA, and brand data with locale annotations.
+- [ ] Define validation rules for required placeholders per template type and tenant overrides.
+- [ ] Obtain approvals from support operations and localization stakeholders with documentation committed.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F3-I2, E2-F1-I3",epic:EmailOps;type:Analysis;priority:P1;area:Product,Week 2
+E6-F4-I2,E6-F4-I2: Implement template rendering service,"### Summary
+Implement template rendering service. Persist templates per tenant with version history, localization, and RBAC enforcement. Render previews with placeholder substitution and fallbacks for missing data. PHPUnit coverage verifies rendering, permission checks, and audit logging.
+
+### Scope
+- [ ] Persist templates per tenant with version history, localization, and RBAC enforcement.
+- [ ] Render previews with placeholder substitution and fallbacks for missing data.
+- [ ] PHPUnit coverage verifies rendering, permission checks, and audit logging.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E6-F4-I1, E2-F3-I3",epic:EmailOps;type:Implementation;priority:P0;area:Backend,Week 3
+E6-F4-I3,E6-F4-I3: Deliver template management UI,"### Summary
+Deliver template management UI. Filament admin pages enable CRUD, localization management, and test-send flows. Include WYSIWYG editor with placeholder picker and validation messaging. Browser test ensures role restrictions and preview accuracy.
+
+### Scope
+- [ ] Filament admin pages enable CRUD, localization management, and test-send flows.
+- [ ] Include WYSIWYG editor with placeholder picker and validation messaging.
+- [ ] Browser test ensures role restrictions and preview accuracy.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E6-F4-I2",epic:EmailOps;type:Implementation;priority:P1;area:Frontend,Week 4
+E7-F1-I1,E7-F1-I1: Define ticket volume metric specification,"### Summary
+Define ticket volume metric specification. Document required aggregations (created, resolved, channel mix) with tenant/brand filters. Outline data freshness SLAs, retention, and privacy safeguards. Secure sign-off from support leadership with spec stored in analytics repo.
+
+### Scope
+- [ ] Document required aggregations (created, resolved, channel mix) with tenant/brand filters.
+- [ ] Outline data freshness SLAs, retention, and privacy safeguards.
+- [ ] Secure sign-off from support leadership with spec stored in analytics repo.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F3-I1, E2-F6-I1",epic:ReportingAnalytics;type:Analysis;priority:P0;area:Product,Week 1
+E7-F1-I2,E7-F1-I2: Build ticket volume aggregation pipeline,"### Summary
+Build ticket volume aggregation pipeline. Implement ETL jobs populating analytics tables or materialized views per tenant. Optimize indexes/partitions for weekly/monthly queries and validate reconciliation against source data. Automated tests verify aggregation accuracy for sample tenants.
+
+### Scope
+- [ ] Implement ETL jobs populating analytics tables or materialized views per tenant.
+- [ ] Optimize indexes/partitions for weekly/monthly queries and validate reconciliation against source data.
+- [ ] Automated tests verify aggregation accuracy for sample tenants.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E7-F1-I1, E2-F6-I2",epic:ReportingAnalytics;type:Implementation;priority:P0;area:Backend,Week 2
+E7-F1-I3,E7-F1-I3: Deliver ticket volume dashboard,"### Summary
+Deliver ticket volume dashboard. Admin dashboard visualizes trends with filters for date range, channel, and team. Export chart snapshots and support sharing via secure links. UI tests confirm RBAC enforcement and data freshness indicators.
+
+### Scope
+- [ ] Admin dashboard visualizes trends with filters for date range, channel, and team.
+- [ ] Export chart snapshots and support sharing via secure links.
+- [ ] UI tests confirm RBAC enforcement and data freshness indicators.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E7-F1-I2, E2-F3-I3",epic:ReportingAnalytics;type:Implementation;priority:P1;area:Frontend,Week 3
+E7-F2-I1,E7-F2-I1: Specify SLA compliance KPIs,"### Summary
+Specify SLA compliance KPIs. Define metrics (breach rate, average response/resolution) with business hour adjustments. Determine segmentation by queue, priority, and escalation level. Document calculation formulas with stakeholder approval archived.
+
+### Scope
+- [ ] Define metrics (breach rate, average response/resolution) with business hour adjustments.
+- [ ] Determine segmentation by queue, priority, and escalation level.
+- [ ] Document calculation formulas with stakeholder approval archived.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E4-F3-I1",epic:ReportingAnalytics;type:Analysis;priority:P0;area:Product,Week 1
+E7-F2-I2,E7-F2-I2: Implement SLA analytics warehouse layer,"### Summary
+Implement SLA analytics warehouse layer. Populate fact tables capturing SLA milestones, breach timestamps, and escalation references. Ensure alignment with automation events and maintain audit-friendly history. Tests validate breach counts and time-in-state calculations.
+
+### Scope
+- [ ] Populate fact tables capturing SLA milestones, breach timestamps, and escalation references.
+- [ ] Ensure alignment with automation events and maintain audit-friendly history.
+- [ ] Tests validate breach counts and time-in-state calculations.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E7-F2-I1, E4-F3-I2",epic:ReportingAnalytics;type:Implementation;priority:P0;area:Backend,Week 2
+E7-F2-I3,E7-F2-I3: Build SLA compliance dashboards,"### Summary
+Build SLA compliance dashboards. Visualize SLA attainment, breach alerts, and trending heatmaps. Provide drill-down into ticket lists with export to CSV. UI tests verify filter combinations and permission gating.
+
+### Scope
+- [ ] Visualize SLA attainment, breach alerts, and trending heatmaps.
+- [ ] Provide drill-down into ticket lists with export to CSV.
+- [ ] UI tests verify filter combinations and permission gating.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E7-F2-I2, E2-F3-I3",epic:ReportingAnalytics;type:Implementation;priority:P1;area:Frontend,Week 3
+E7-F3-I1,E7-F3-I1: Define productivity KPI catalog,"### Summary
+Define productivity KPI catalog. Identify metrics (handle time, resolution count, CSAT proxy) with team/agent segmentation. Document data sources including tickets, automations, and AI insights. Approval recorded from workforce management stakeholders.
+
+### Scope
+- [ ] Identify metrics (handle time, resolution count, CSAT proxy) with team/agent segmentation.
+- [ ] Document data sources including tickets, automations, and AI insights.
+- [ ] Approval recorded from workforce management stakeholders.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E2-F4-I1, E2-F6-I1",epic:ReportingAnalytics;type:Analysis;priority:P1;area:Product,Week 2
+E7-F3-I2,E7-F3-I2: Implement productivity aggregation jobs,"### Summary
+Implement productivity aggregation jobs. Compute daily/weekly metrics with support for schedule adjustments and agent availability. Store history for trend analysis and compare against targets. Tests validate calculations for sample agents with edge cases (bulk actions, escalations).
+
+### Scope
+- [ ] Compute daily/weekly metrics with support for schedule adjustments and agent availability.
+- [ ] Store history for trend analysis and compare against targets.
+- [ ] Tests validate calculations for sample agents with edge cases (bulk actions, escalations).
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E7-F3-I1, E1-F7-I2",epic:ReportingAnalytics;type:Implementation;priority:P0;area:Backend,Week 3
+E7-F3-I3,E7-F3-I3: Provide agent scorecard dashboards,"### Summary
+Provide agent scorecard dashboards. Agent and manager views show KPI trends, rankings, and coaching notes. Enable export to PDF for performance reviews with watermarking. UI tests cover permission scopes (self vs. manager) and data accuracy.
+
+### Scope
+- [ ] Agent and manager views show KPI trends, rankings, and coaching notes.
+- [ ] Enable export to PDF for performance reviews with watermarking.
+- [ ] UI tests cover permission scopes (self vs. manager) and data accuracy.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E7-F3-I2, E2-F3-I3",epic:ReportingAnalytics;type:Implementation;priority:P1;area:Frontend,Week 4
+E7-F4-I1,E7-F4-I1: Document reporting export requirements,"### Summary
+Document reporting export requirements. Capture supported formats (CSV, XLSX, PDF), scheduling needs, and anonymization requirements. Define size limits, delivery channels, and retention policies. Approval secured from compliance and analytics leads with document archived.
+
+### Scope
+- [ ] Capture supported formats (CSV, XLSX, PDF), scheduling needs, and anonymization requirements.
+- [ ] Define size limits, delivery channels, and retention policies.
+- [ ] Approval secured from compliance and analytics leads with document archived.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E7-F1-I1, E7-F2-I1",epic:ReportingAnalytics;type:Analysis;priority:P1;area:Product,Week 2
+E7-F4-I2,E7-F4-I2: Implement export generation service,"### Summary
+Implement export generation service. Queue-based export generator pulls from analytics tables with tenant isolation and pagination. Support scheduled and on-demand exports with status tracking. Tests verify file integrity, localization, and failure retries.
+
+### Scope
+- [ ] Queue-based export generator pulls from analytics tables with tenant isolation and pagination.
+- [ ] Support scheduled and on-demand exports with status tracking.
+- [ ] Tests verify file integrity, localization, and failure retries.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E7-F4-I1, E7-F1-I2, E7-F2-I2",epic:ReportingAnalytics;type:Implementation;priority:P0;area:Backend,Week 3
+E7-F4-I3,E7-F4-I3: Deliver export distribution & auditing,"### Summary
+Deliver export distribution & auditing. Provide secure download endpoints, email delivery, and optional storage to S3 with signed URLs. Log export access events for compliance review and integrate with audit UI. Integration tests confirm RBAC restrictions and expiration handling.
+
+### Scope
+- [ ] Provide secure download endpoints, email delivery, and optional storage to S3 with signed URLs.
+- [ ] Log export access events for compliance review and integrate with audit UI.
+- [ ] Integration tests confirm RBAC restrictions and expiration handling.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E7-F4-I2, E2-F6-I3",epic:ReportingAnalytics;type:Implementation;priority:P1;area:Backend,Week 4
+E8-F1-I1,E8-F1-I1: Define collaboration notification strategy,"### Summary
+Define collaboration notification strategy. Document event types routed to Slack/MS Teams with payload schema and tenant scoping. Outline authentication, rate limits, and retry policies per platform. Secure approval from DevOps and security teams with ADR committed.
+
+### Scope
+- [ ] Document event types routed to Slack/MS Teams with payload schema and tenant scoping.
+- [ ] Outline authentication, rate limits, and retry policies per platform.
+- [ ] Secure approval from DevOps and security teams with ADR committed.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F8-I1, E4-F4-I1",epic:Integrations;type:Analysis;priority:P1;area:Architecture,Week 1
+E8-F1-I2,E8-F1-I2: Implement messaging webhook dispatchers,"### Summary
+Implement messaging webhook dispatchers. Create services that send formatted messages to Slack/MS Teams with interactive actions (acknowledge, assign). Handle signing secrets, token refresh, and retry with exponential backoff. Tests mock provider APIs covering success, throttling, and failure.
+
+### Scope
+- [ ] Create services that send formatted messages to Slack/MS Teams with interactive actions (acknowledge, assign).
+- [ ] Handle signing secrets, token refresh, and retry with exponential backoff.
+- [ ] Tests mock provider APIs covering success, throttling, and failure.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E8-F1-I1, E1-F8-I2",epic:Integrations;type:Implementation;priority:P0;area:Backend,Week 2
+E8-F1-I3,E8-F1-I3: Provide tenant notification settings UI,"### Summary
+Provide tenant notification settings UI. Admin UI enables channel configuration, event selection, and test notifications. Enforce RBAC and audit logging for configuration changes. Browser test covers create, update, disable flows per tenant.
+
+### Scope
+- [ ] Admin UI enables channel configuration, event selection, and test notifications.
+- [ ] Enforce RBAC and audit logging for configuration changes.
+- [ ] Browser test covers create, update, disable flows per tenant.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E8-F1-I2, E2-F3-I3",epic:Integrations;type:Implementation;priority:P1;area:Frontend,Week 3
+E8-F2-I1,E8-F2-I1: Specify webhook event contract,"### Summary
+Specify webhook event contract. Define payload schema, signature mechanism, and versioning for ticket-created/status-changed events. Document retry/backoff policy and tenant-level endpoint management. Publish specification with stakeholder sign-off stored in repo.
+
+### Scope
+- [ ] Define payload schema, signature mechanism, and versioning for ticket-created/status-changed events.
+- [ ] Document retry/backoff policy and tenant-level endpoint management.
+- [ ] Publish specification with stakeholder sign-off stored in repo.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F8-I1",epic:Integrations;type:Analysis;priority:P1;area:Architecture,Week 1
+E8-F2-I2,E8-F2-I2: Build webhook delivery pipeline,"### Summary
+Build webhook delivery pipeline. Implement queue-based delivery with signing, retries, and dead-letter handling. Provide monitoring for failure rates and response latency per endpoint. Tests cover success, retry exhaustion, and signature validation.
+
+### Scope
+- [ ] Implement queue-based delivery with signing, retries, and dead-letter handling.
+- [ ] Provide monitoring for failure rates and response latency per endpoint.
+- [ ] Tests cover success, retry exhaustion, and signature validation.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E8-F2-I1, E1-F8-I2",epic:Integrations;type:Implementation;priority:P0;area:Backend,Week 2
+E8-F2-I3,E8-F2-I3: Launch webhook management console,"### Summary
+Launch webhook management console. Admin portal allows endpoint CRUD, secret rotation, and replay of events. Include delivery history with filtering and export. UI tests ensure RBAC and replay auditing function correctly.
+
+### Scope
+- [ ] Admin portal allows endpoint CRUD, secret rotation, and replay of events.
+- [ ] Include delivery history with filtering and export.
+- [ ] UI tests ensure RBAC and replay auditing function correctly.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E8-F2-I2, E2-F6-I3",epic:Integrations;type:Implementation;priority:P1;area:Frontend,Week 3
+E8-F3-I1,E8-F3-I1: Gather SSO requirements & mappings,"### Summary
+Gather SSO requirements & mappings. Document supported protocols (SAML, OIDC), attribute mapping to roles, and tenant onboarding workflow. Capture session timeout, MFA passthrough, and fallback policies. Obtain approvals from security and IT stakeholder council.
+
+### Scope
+- [ ] Document supported protocols (SAML, OIDC), attribute mapping to roles, and tenant onboarding workflow.
+- [ ] Capture session timeout, MFA passthrough, and fallback policies.
+- [ ] Obtain approvals from security and IT stakeholder council.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E2-F2-I1, E2-F3-I1",epic:Integrations;type:Analysis;priority:P0;area:Architecture,Week 1
+E8-F3-I2,E8-F3-I2: Implement SSO authentication adapters,"### Summary
+Implement SSO authentication adapters. Build adapters for SAML/OIDC providers with tenant-specific metadata and Just-In-Time provisioning. Ensure compatibility with existing RBAC policies and two-factor flows. Tests validate login, logout, and error scenarios across providers.
+
+### Scope
+- [ ] Build adapters for SAML/OIDC providers with tenant-specific metadata and Just-In-Time provisioning.
+- [ ] Ensure compatibility with existing RBAC policies and two-factor flows.
+- [ ] Tests validate login, logout, and error scenarios across providers.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E8-F3-I1, E2-F3-I3",epic:Integrations;type:Implementation;priority:P0;area:Backend,Week 2
+E8-F3-I3,E8-F3-I3: Configure SSO lifecycle management,"### Summary
+Configure SSO lifecycle management. Provide automation for certificate rotation, deprovisioning, and failover to local auth. Expose admin tooling for connection health checks and status alerts. Integration tests cover rotation, suspension, and fallback flows.
+
+### Scope
+- [ ] Provide automation for certificate rotation, deprovisioning, and failover to local auth.
+- [ ] Expose admin tooling for connection health checks and status alerts.
+- [ ] Integration tests cover rotation, suspension, and fallback flows.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E8-F3-I2, E2-F6-I2",epic:Integrations;type:Implementation;priority:P1;area:Backend,Week 3
+E8-F4-I1,E8-F4-I1: Define calendar sync use cases,"### Summary
+Define calendar sync use cases. Document SLA events to push to calendars, tenant-specific rules, and attendee privacy requirements. Determine supported providers (Google, Outlook) and authentication scopes. Publish approved spec with customer success sign-off.
+
+### Scope
+- [ ] Document SLA events to push to calendars, tenant-specific rules, and attendee privacy requirements.
+- [ ] Determine supported providers (Google, Outlook) and authentication scopes.
+- [ ] Publish approved spec with customer success sign-off.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E4-F3-I1, E4-F4-I1",epic:Integrations;type:Analysis;priority:P1;area:Product,Week 2
+E8-F4-I2,E8-F4-I2: Build calendar synchronization service,"### Summary
+Build calendar synchronization service. Implement queued jobs creating/updating calendar events for SLA deadlines with reminders. Handle provider webhooks for event changes and reflect updates in ticket SLA timelines. Tests simulate provider interactions, timezone handling, and failure retries.
+
+### Scope
+- [ ] Implement queued jobs creating/updating calendar events for SLA deadlines with reminders.
+- [ ] Handle provider webhooks for event changes and reflect updates in ticket SLA timelines.
+- [ ] Tests simulate provider interactions, timezone handling, and failure retries.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E8-F4-I1, E4-F3-I2",epic:Integrations;type:Implementation;priority:P1;area:Backend,Week 3
+E8-F4-I3,E8-F4-I3: Expose calendar integration settings,"### Summary
+Expose calendar integration settings. Admin UI supports provider OAuth setup, calendar selection, and reminder configuration. Display sync status, error logs, and manual resync controls. UI tests validate permission scopes and provider disconnect flows.
+
+### Scope
+- [ ] Admin UI supports provider OAuth setup, calendar selection, and reminder configuration.
+- [ ] Display sync status, error logs, and manual resync controls.
+- [ ] UI tests validate permission scopes and provider disconnect flows.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E8-F4-I2, E2-F3-I3",epic:Integrations;type:Implementation;priority:P1;area:Frontend,Week 4
+E9-F1-I1,E9-F1-I1: Validate admin portal IA & permissions,"### Summary
+Validate admin portal IA & permissions. Document information architecture covering navigation, module groupings, and tenant scoping. Map required permissions per screen aligning with capability matrix from E2-F2-I1. Secure sign-off from product and security stakeholders with ADR committed to repository.
+
+### Scope
+- [ ] Document information architecture covering navigation, module groupings, and tenant scoping.
+- [ ] Map required permissions per screen aligning with capability matrix from E2-F2-I1.
+- [ ] Secure sign-off from product and security stakeholders with ADR committed to repository.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E2-F2-I1",epic:AdminPortal;type:Analysis;priority:P0;area:Architecture,Week 1
+E9-F1-I2,E9-F1-I2: Implement Filament admin shell,"### Summary
+Implement Filament admin shell. Configure Filament layout, theming, and localization aligned with tenant branding defaults. Wire authentication guards and middleware enforcing RBAC policies defined in E2-F3-I3. Feature tests cover admin login, navigation rendering, and unauthorized access denial.
+
+### Scope
+- [ ] Configure Filament layout, theming, and localization aligned with tenant branding defaults.
+- [ ] Wire authentication guards and middleware enforcing RBAC policies defined in E2-F3-I3.
+- [ ] Feature tests cover admin login, navigation rendering, and unauthorized access denial.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E9-F1-I1, E2-F3-I3",epic:AdminPortal;type:Implementation;priority:P0;area:Frontend,Week 2
+E9-F1-I3,E9-F1-I3: Integrate core module navigation stubs,"### Summary
+Integrate core module navigation stubs. Register placeholder resources for ticketing, contacts, automations, and reporting with feature flags. Surface contextual breadcrumbs, notifications, and tenant switcher backed by E1-F3-I3 data. Browser test validates navigation persistence and tenant isolation.
+
+### Scope
+- [ ] Register placeholder resources for ticketing, contacts, automations, and reporting with feature flags.
+- [ ] Surface contextual breadcrumbs, notifications, and tenant switcher backed by E1-F3-I3 data.
+- [ ] Browser test validates navigation persistence and tenant isolation.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E9-F1-I2, E1-F3-I3",epic:AdminPortal;type:Implementation;priority:P1;area:Frontend,Week 3
+E9-F2-I1,E9-F2-I1: Capture customer portal UX flows,"### Summary
+Capture customer portal UX flows. Document ticket submission, status viewing, and reply workflows with localization needs. Define guest vs. authenticated experiences including attachment limits and SLA messaging. Obtain approval from customer success and support leadership.
+
+### Scope
+- [ ] Document ticket submission, status viewing, and reply workflows with localization needs.
+- [ ] Define guest vs. authenticated experiences including attachment limits and SLA messaging.
+- [ ] Obtain approval from customer success and support leadership.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F1-I1",epic:AdminPortal;type:Analysis;priority:P1;area:Product,Week 1
+E9-F2-I2,E9-F2-I2: Build customer portal interface,"### Summary
+Build customer portal interface. Implement responsive portal leveraging JWT auth from E9-F4-I2 with ticket submission via E1-F1-I2. Display ticket timeline, attachments, and public replies with pagination and filtering. Cypress test covers submission, reply, and status refresh scenarios.
+
+### Scope
+- [ ] Implement responsive portal leveraging JWT auth from E9-F4-I2 with ticket submission via E1-F1-I2.
+- [ ] Display ticket timeline, attachments, and public replies with pagination and filtering.
+- [ ] Cypress test covers submission, reply, and status refresh scenarios.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E9-F2-I1, E9-F4-I2, E1-F1-I2",epic:AdminPortal;type:Implementation;priority:P0;area:Frontend,Week 3
+E9-F2-I3,E9-F2-I3: Harden accessibility & localization,"### Summary
+Harden accessibility & localization. Audit portal for WCAG 2.1 AA compliance including keyboard navigation and ARIA landmarks. Integrate locale switcher with multilingual content from E3-F5-I2. Automated tests validate language toggles, RTL layouts, and accessibility checks.
+
+### Scope
+- [ ] Audit portal for WCAG 2.1 AA compliance including keyboard navigation and ARIA landmarks.
+- [ ] Integrate locale switcher with multilingual content from E3-F5-I2.
+- [ ] Automated tests validate language toggles, RTL layouts, and accessibility checks.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E9-F2-I2, E3-F5-I2",epic:AdminPortal;type:Implementation;priority:P1;area:Frontend,Week 4
+E9-F3-I1,E9-F3-I1: Define branding configuration schema,"### Summary
+Define branding configuration schema. Specify storage for logos, color palettes, typography, and domain aliases per tenant. Document precedence rules for brand vs. portal-specific overrides and caching strategy. Secure stakeholder approval with ADR archived.
+
+### Scope
+- [ ] Specify storage for logos, color palettes, typography, and domain aliases per tenant.
+- [ ] Document precedence rules for brand vs. portal-specific overrides and caching strategy.
+- [ ] Secure stakeholder approval with ADR archived.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E9-F1-I1",epic:AdminPortal;type:Analysis;priority:P1;area:Architecture,Week 2
+E9-F3-I2,E9-F3-I2: Implement branding service & assets pipeline,"### Summary
+Implement branding service & assets pipeline. Persist branding settings with validation, file processing, and CDN-friendly delivery. Provide API hooks for portals to resolve theme bundles and fallback defaults. Tests cover create/update flows, cache invalidation, and tenant isolation.
+
+### Scope
+- [ ] Persist branding settings with validation, file processing, and CDN-friendly delivery.
+- [ ] Provide API hooks for portals to resolve theme bundles and fallback defaults.
+- [ ] Tests cover create/update flows, cache invalidation, and tenant isolation.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E9-F3-I1, E1-F3-I2",epic:AdminPortal;type:Implementation;priority:P0;area:Backend,Week 3
+E9-F3-I3,E9-F3-I3: Deliver branding management UI,"### Summary
+Deliver branding management UI. Admin portal exposes branding editors, domain verification workflow, and preview mode. Enforce RBAC and audit logging for customization changes leveraging E2-F6-I2. Browser test validates upload, preview, and domain toggle sequences.
+
+### Scope
+- [ ] Admin portal exposes branding editors, domain verification workflow, and preview mode.
+- [ ] Enforce RBAC and audit logging for customization changes leveraging E2-F6-I2.
+- [ ] Browser test validates upload, preview, and domain toggle sequences.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E9-F3-I2, E9-F1-I2, E2-F6-I2",epic:AdminPortal;type:Implementation;priority:P1;area:Frontend,Week 4
+E9-F4-I1,E9-F4-I1: Align portal authentication requirements,"### Summary
+Align portal authentication requirements. Document login, JWT refresh, and session timeout policies for customer and admin portals. Define SSO touchpoints with E8-F3-I1 and social login providers including scopes. Capture security approvals with ADR stored in repository.
+
+### Scope
+- [ ] Document login, JWT refresh, and session timeout policies for customer and admin portals.
+- [ ] Define SSO touchpoints with E8-F3-I1 and social login providers including scopes.
+- [ ] Capture security approvals with ADR stored in repository.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E8-F3-I1",epic:AdminPortal;type:Analysis;priority:P0;area:Architecture,Week 1
+E9-F4-I2,E9-F4-I2: Implement JWT & session bridge,"### Summary
+Implement JWT & session bridge. Configure Laravel Sanctum/JWT issuing for portal clients with tenant-aware claims. Integrate refresh rotation, device tracking, and logout hooks referencing E2-F6-I2. Tests validate token issuance, refresh, and revocation across tenants.
+
+### Scope
+- [ ] Configure Laravel Sanctum/JWT issuing for portal clients with tenant-aware claims.
+- [ ] Integrate refresh rotation, device tracking, and logout hooks referencing E2-F6-I2.
+- [ ] Tests validate token issuance, refresh, and revocation across tenants.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E9-F4-I1, E2-F3-I3, E2-F6-I2",epic:AdminPortal;type:Implementation;priority:P0;area:Backend,Week 2
+E9-F4-I3,E9-F4-I3: Add social login & SSO handoff,"### Summary
+Add social login & SSO handoff. Implement OAuth providers (Google, Microsoft) with Just-In-Time user provisioning aligned to roles. Bridge SSO assertions from E8-F3-I2 into portal JWT session creation with audit entries. Integration tests cover success, denied scope, and tenant mismatch flows.
+
+### Scope
+- [ ] Implement OAuth providers (Google, Microsoft) with Just-In-Time user provisioning aligned to roles.
+- [ ] Bridge SSO assertions from E8-F3-I2 into portal JWT session creation with audit entries.
+- [ ] Integration tests cover success, denied scope, and tenant mismatch flows.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E9-F4-I2, E8-F3-I2",epic:AdminPortal;type:Implementation;priority:P1;area:Backend,Week 3
+E10-F1-I1,E10-F1-I1: Document MFA policy & UX flows,"### Summary
+Document MFA policy & UX flows. Define required vs. optional MFA scopes per role/tenant with enforcement timelines. Specify supported factors (TOTP, WebAuthn) and recovery channel requirements. Obtain approvals from security, legal, and support leadership.
+
+### Scope
+- [ ] Define required vs. optional MFA scopes per role/tenant with enforcement timelines.
+- [ ] Specify supported factors (TOTP, WebAuthn) and recovery channel requirements.
+- [ ] Obtain approvals from security, legal, and support leadership.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E2-F2-I1",epic:SecurityCompliance;type:Analysis;priority:P0;area:Security,Week 1
+E10-F1-I2,E10-F1-I2: Implement MFA enrollment & enforcement,"### Summary
+Implement MFA enrollment & enforcement. Add MFA setup flows with secrets storage, verification, and backup codes respecting E2-F3-I3 RBAC. Enforce MFA checks on login/API token issuance with throttling and audit logging. Tests cover enrollment, verification, bypass denial, and device remembrance.
+
+### Scope
+- [ ] Add MFA setup flows with secrets storage, verification, and backup codes respecting E2-F3-I3 RBAC.
+- [ ] Enforce MFA checks on login/API token issuance with throttling and audit logging.
+- [ ] Tests cover enrollment, verification, bypass denial, and device remembrance.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E10-F1-I1, E2-F3-I3",epic:SecurityCompliance;type:Implementation;priority:P0;area:Backend,Week 2
+E10-F1-I3,E10-F1-I3: Launch MFA self-service management UI,"### Summary
+Launch MFA self-service management UI. Provide user settings to manage devices, regenerate backup codes, and review recent MFA events. Include forced re-enrollment prompts for policy changes with localization. Browser tests ensure accessibility and unauthorized access protection.
+
+### Scope
+- [ ] Provide user settings to manage devices, regenerate backup codes, and review recent MFA events.
+- [ ] Include forced re-enrollment prompts for policy changes with localization.
+- [ ] Browser tests ensure accessibility and unauthorized access protection.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E10-F1-I2",epic:SecurityCompliance;type:Implementation;priority:P1;area:Frontend,Week 3
+E10-F2-I1,E10-F2-I1: Audit permission coverage,"### Summary
+Audit permission coverage. Inventory all routes, queues, and UI components to mapped permissions referencing E2-F3-I3. Highlight gaps, legacy bypasses, and propose remediation backlog. Share report with engineering leadership for approval.
+
+### Scope
+- [ ] Inventory all routes, queues, and UI components to mapped permissions referencing E2-F3-I3.
+- [ ] Highlight gaps, legacy bypasses, and propose remediation backlog.
+- [ ] Share report with engineering leadership for approval.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E2-F3-I3",epic:SecurityCompliance;type:Analysis;priority:P1;area:Security,Week 2
+E10-F2-I2,E10-F2-I2: Implement automated RBAC regression tests,"### Summary
+Implement automated RBAC regression tests. Create smoke suites covering critical ticketing, automation, and portal endpoints for each role. Integrate tests into CI pipeline with fail-fast reporting and fixture isolation. Document process for adding new permission checks in developer handbook.
+
+### Scope
+- [ ] Create smoke suites covering critical ticketing, automation, and portal endpoints for each role.
+- [ ] Integrate tests into CI pipeline with fail-fast reporting and fixture isolation.
+- [ ] Document process for adding new permission checks in developer handbook.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E10-F2-I1, E11-F5-I2",epic:SecurityCompliance;type:Implementation;priority:P0;area:Backend,Week 3
+E10-F2-I3,E10-F2-I3: Deploy runtime permission monitoring,"### Summary
+Deploy runtime permission monitoring. Instrument middleware to emit metrics/logs on denied or elevated access attempts into observability stack (E11-F4-I2). Configure alerts for anomaly spikes with response playbooks. Tests validate telemetry emission and alert triggering using staging data.
+
+### Scope
+- [ ] Instrument middleware to emit metrics/logs on denied or elevated access attempts into observability stack (E11-F4-I2).
+- [ ] Configure alerts for anomaly spikes with response playbooks.
+- [ ] Tests validate telemetry emission and alert triggering using staging data.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E10-F2-I2, E11-F4-I2",epic:SecurityCompliance;type:Implementation;priority:P1;area:DevOps,Week 4
+E10-F3-I1,E10-F3-I1: Define security audit taxonomy,"### Summary
+Define security audit taxonomy. Catalog sensitive events (login attempts, MFA changes, role updates, integrations) and metadata needs. Align retention with compliance mandates and tenant overrides. Secure approval from security officer and compliance lead.
+
+### Scope
+- [ ] Catalog sensitive events (login attempts, MFA changes, role updates, integrations) and metadata needs.
+- [ ] Align retention with compliance mandates and tenant overrides.
+- [ ] Secure approval from security officer and compliance lead.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E2-F6-I1",epic:SecurityCompliance;type:Analysis;priority:P1;area:Security,Week 2
+E10-F3-I2,E10-F3-I2: Capture security events & storage,"### Summary
+Capture security events & storage. Extend audit pipeline (E2-F6-I2) to persist security taxonomy with tamper-evident hashing. Ensure events reference actor, tenant, IP/device fingerprints, and correlation IDs. Tests validate logging on success/failure paths and hash verification.
+
+### Scope
+- [ ] Extend audit pipeline (E2-F6-I2) to persist security taxonomy with tamper-evident hashing.
+- [ ] Ensure events reference actor, tenant, IP/device fingerprints, and correlation IDs.
+- [ ] Tests validate logging on success/failure paths and hash verification.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E10-F3-I1, E2-F6-I2",epic:SecurityCompliance;type:Implementation;priority:P0;area:Backend,Week 3
+E10-F3-I3,E10-F3-I3: Expose security audit dashboards,"### Summary
+Expose security audit dashboards. Admin UI provides filtered views, anomaly highlights, and export controls for security staff. Enforce access controls limited to security role with MFA requirement check from E10-F1-I2. UI tests confirm filtering, export, and unauthorized access handling.
+
+### Scope
+- [ ] Admin UI provides filtered views, anomaly highlights, and export controls for security staff.
+- [ ] Enforce access controls limited to security role with MFA requirement check from E10-F1-I2.
+- [ ] UI tests confirm filtering, export, and unauthorized access handling.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E10-F3-I2, E2-F6-I3, E10-F1-I2",epic:SecurityCompliance;type:Implementation;priority:P1;area:Frontend,Week 4
+E10-F4-I1,E10-F4-I1: Extend compliance coverage inventory,"### Summary
+Extend compliance coverage inventory. Map personal data across knowledge base, automations, AI logs, and integrations beyond contacts/tickets. Identify data transfer mechanisms and cross-border considerations with legal review. Archive signed compliance memo in repository.
+
+### Scope
+- [ ] Map personal data across knowledge base, automations, AI logs, and integrations beyond contacts/tickets.
+- [ ] Identify data transfer mechanisms and cross-border considerations with legal review.
+- [ ] Archive signed compliance memo in repository.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E2-F7-I1",epic:SecurityCompliance;type:Analysis;priority:P0;area:Compliance,Week 2
+E10-F4-I2,E10-F4-I2: Automate data subject request orchestration,"### Summary
+Automate data subject request orchestration. Extend anonymization workflows (E2-F7-I2) to include AI outputs, search indexes, and external integrations. Provide orchestration dashboard linking approvals, execution status, and audit entries. Tests ensure cascading deletions respect retention exceptions and error recovery.
+
+### Scope
+- [ ] Extend anonymization workflows (E2-F7-I2) to include AI outputs, search indexes, and external integrations.
+- [ ] Provide orchestration dashboard linking approvals, execution status, and audit entries.
+- [ ] Tests ensure cascading deletions respect retention exceptions and error recovery.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E10-F4-I1, E2-F7-I2, E3-F6-I2",epic:SecurityCompliance;type:Implementation;priority:P0;area:Backend,Week 3
+E10-F4-I3,E10-F4-I3: Deliver compliance reporting toolkit,"### Summary
+Deliver compliance reporting toolkit. Generate downloadable compliance reports summarizing DSAR metrics, anonymization timelines, and outstanding holds. Integrate with export service from E7-F4-I2 and audit logging for access tracking. UI tests validate report generation, localization, and RBAC enforcement.
+
+### Scope
+- [ ] Generate downloadable compliance reports summarizing DSAR metrics, anonymization timelines, and outstanding holds.
+- [ ] Integrate with export service from E7-F4-I2 and audit logging for access tracking.
+- [ ] UI tests validate report generation, localization, and RBAC enforcement.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E10-F4-I2, E7-F4-I2, E2-F6-I3",epic:SecurityCompliance;type:Implementation;priority:P1;area:Frontend,Week 4
+E11-F1-I1,E11-F1-I1: Define container build strategy,"### Summary
+Define container build strategy. Document base image selection, multi-stage layering, and build cache policy. Specify environment variable management and secrets handling for build-time vs run-time. Gain approval from platform and security teams.
+
+### Scope
+- [ ] Document base image selection, multi-stage layering, and build cache policy.
+- [ ] Specify environment variable management and secrets handling for build-time vs run-time.
+- [ ] Gain approval from platform and security teams.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: None",epic:DevOpsInfra;type:Analysis;priority:P0;area:DevOps,Week 1
+E11-F1-I2,E11-F1-I2: Implement multi-stage Dockerfile,"### Summary
+Implement multi-stage Dockerfile. Author Dockerfile with dependency install, asset build, and runtime stages optimized for size. Validate local builds, image scanning, and reproducibility across environments. Automated test pipeline builds image and runs smoke tests.
+
+### Scope
+- [ ] Author Dockerfile with dependency install, asset build, and runtime stages optimized for size.
+- [ ] Validate local builds, image scanning, and reproducibility across environments.
+- [ ] Automated test pipeline builds image and runs smoke tests.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E11-F1-I1",epic:DevOpsInfra;type:Implementation;priority:P0;area:DevOps,Week 2
+E11-F1-I3,E11-F1-I3: Integrate container builds into CI,"### Summary
+Integrate container builds into CI. Configure CI workflows to build, tag, and push images with cache reuse and provenance metadata. Enforce vulnerability scanning gates and artifact retention policies. Documentation guides developers on local vs. CI build workflows.
+
+### Scope
+- [ ] Configure CI workflows to build, tag, and push images with cache reuse and provenance metadata.
+- [ ] Enforce vulnerability scanning gates and artifact retention policies.
+- [ ] Documentation guides developers on local vs. CI build workflows.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E11-F1-I2, E11-F5-I2",epic:DevOpsInfra;type:Implementation;priority:P1;area:DevOps,Week 3
+E11-F2-I1,E11-F2-I1: Plan Horizon deployment architecture,"### Summary
+Plan Horizon deployment architecture. Define process scaling, queue segmentation, and tenant isolation strategy for Horizon. Outline authentication, TLS termination, and network controls. Secure DevOps sign-off with architecture record.
+
+### Scope
+- [ ] Define process scaling, queue segmentation, and tenant isolation strategy for Horizon.
+- [ ] Outline authentication, TLS termination, and network controls.
+- [ ] Secure DevOps sign-off with architecture record.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F8-I1",epic:DevOpsInfra;type:Analysis;priority:P1;area:DevOps,Week 1
+E11-F2-I2,E11-F2-I2: Configure Horizon & queue metrics,"### Summary
+Configure Horizon & queue metrics. Deploy Horizon with Redis connection tuning, supervisor configuration, and tagging by job type. Emit metrics to observability stack (E11-F4-I2) covering throughput, failures, and retries. Tests simulate job loads verifying scaling and alert thresholds.
+
+### Scope
+- [ ] Deploy Horizon with Redis connection tuning, supervisor configuration, and tagging by job type.
+- [ ] Emit metrics to observability stack (E11-F4-I2) covering throughput, failures, and retries.
+- [ ] Tests simulate job loads verifying scaling and alert thresholds.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E11-F2-I1, E1-F8-I2, E11-F4-I2",epic:DevOpsInfra;type:Implementation;priority:P0;area:Backend,Week 3
+E11-F2-I3,E11-F2-I3: Secure Horizon dashboard access,"### Summary
+Secure Horizon dashboard access. Protect Horizon UI with SSO integration (E8-F3-I2) and MFA enforcement (E10-F1-I2). Implement audit logging for dashboard actions and job replays via E2-F6-I2. Security tests validate authorization, CSRF protections, and session timeout.
+
+### Scope
+- [ ] Protect Horizon UI with SSO integration (E8-F3-I2) and MFA enforcement (E10-F1-I2).
+- [ ] Implement audit logging for dashboard actions and job replays via E2-F6-I2.
+- [ ] Security tests validate authorization, CSRF protections, and session timeout.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E11-F2-I2, E8-F3-I2, E10-F1-I2, E2-F6-I2",epic:DevOpsInfra;type:Implementation;priority:P1;area:Security,Week 4
+E11-F3-I1,E11-F3-I1: Document caching and session strategy,"### Summary
+Document caching and session strategy. Outline cache tiers, eviction policies, and session failover requirements. Identify keys requiring invalidation hooks and data lifecycle compliance. Obtain architecture review approval.
+
+### Scope
+- [ ] Outline cache tiers, eviction policies, and session failover requirements.
+- [ ] Identify keys requiring invalidation hooks and data lifecycle compliance.
+- [ ] Obtain architecture review approval.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E1-F3-I1",epic:DevOpsInfra;type:Analysis;priority:P1;area:Architecture,Week 1
+E11-F3-I2,E11-F3-I2: Implement Redis configuration & guards,"### Summary
+Implement Redis configuration & guards. Configure Redis connections, prefixes per tenant, and encrypted session storage. Update application caching layers with tagging and instrumentation. Tests validate failover behavior and session persistence.
+
+### Scope
+- [ ] Configure Redis connections, prefixes per tenant, and encrypted session storage.
+- [ ] Update application caching layers with tagging and instrumentation.
+- [ ] Tests validate failover behavior and session persistence.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E11-F3-I1",epic:DevOpsInfra;type:Implementation;priority:P0;area:Backend,Week 2
+E11-F3-I3,E11-F3-I3: Add cache observability & failover drills,"### Summary
+Add cache observability & failover drills. Integrate cache metrics/logs into observability platform via E11-F4-I2. Document and rehearse failover runbooks with automated chaos tests. Reports capture drill outcomes and remediation actions.
+
+### Scope
+- [ ] Integrate cache metrics/logs into observability platform via E11-F4-I2.
+- [ ] Document and rehearse failover runbooks with automated chaos tests.
+- [ ] Reports capture drill outcomes and remediation actions.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E11-F3-I2, E11-F4-I2",epic:DevOpsInfra;type:Implementation;priority:P1;area:DevOps,Week 3
+E11-F4-I1,E11-F4-I1: Define observability SLIs/SLOs,"### Summary
+Define observability SLIs/SLOs. Establish latency, error rate, availability, and business SLIs for major services. Set SLO targets with alert thresholds and escalation policies. Secure approval from engineering leadership with documentation stored centrally.
+
+### Scope
+- [ ] Establish latency, error rate, availability, and business SLIs for major services.
+- [ ] Set SLO targets with alert thresholds and escalation policies.
+- [ ] Secure approval from engineering leadership with documentation stored centrally.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E2-F6-I1",epic:DevOpsInfra;type:Analysis;priority:P0;area:DevOps,Week 1
+E11-F4-I2,E11-F4-I2: Implement centralized logging & metrics pipeline,"### Summary
+Implement centralized logging & metrics pipeline. Deploy log aggregation, metrics collection, and trace instrumentation with tenant tagging. Ensure data retention, access controls, and encryption meet compliance requirements. Tests verify ingestion from Laravel, queues, and infrastructure components.
+
+### Scope
+- [ ] Deploy log aggregation, metrics collection, and trace instrumentation with tenant tagging.
+- [ ] Ensure data retention, access controls, and encryption meet compliance requirements.
+- [ ] Tests verify ingestion from Laravel, queues, and infrastructure components.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E11-F4-I1, E11-F3-I2",epic:DevOpsInfra;type:Implementation;priority:P0;area:DevOps,Week 2
+E11-F4-I3,E11-F4-I3: Configure alerting & response runbooks,"### Summary
+Configure alerting & response runbooks. Create alert routing for critical SLIs with on-call schedules and escalation paths. Publish runbooks and integrate with incident management tooling. Conduct alert fire drills logging response times and lessons learned.
+
+### Scope
+- [ ] Create alert routing for critical SLIs with on-call schedules and escalation paths.
+- [ ] Publish runbooks and integrate with incident management tooling.
+- [ ] Conduct alert fire drills logging response times and lessons learned.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E11-F4-I2, E2-F6-I2",epic:DevOpsInfra;type:Implementation;priority:P1;area:DevOps,Week 3
+E11-F5-I1,E11-F5-I1: Design CI/CD architecture blueprint,"### Summary
+Design CI/CD architecture blueprint. Document stages for linting, testing, security scanning, build, and deployment with branch policies. Define environment promotion strategy, approvals, and rollback mechanisms. Obtain stakeholder approval recorded in engineering handbook.
+
+### Scope
+- [ ] Document stages for linting, testing, security scanning, build, and deployment with branch policies.
+- [ ] Define environment promotion strategy, approvals, and rollback mechanisms.
+- [ ] Obtain stakeholder approval recorded in engineering handbook.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: None",epic:DevOpsInfra;type:Analysis;priority:P0;area:DevOps,Week 1
+E11-F5-I2,E11-F5-I2: Implement continuous integration workflows,"### Summary
+Implement continuous integration workflows. Configure pipelines running static analysis, unit, feature, and Dusk tests with parallelization. Enforce quality gates (coverage, lint) and artifact uploads for build outputs. Tests ensure pipeline reliability and failure notifications.
+
+### Scope
+- [ ] Configure pipelines running static analysis, unit, feature, and Dusk tests with parallelization.
+- [ ] Enforce quality gates (coverage, lint) and artifact uploads for build outputs.
+- [ ] Tests ensure pipeline reliability and failure notifications.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E11-F5-I1",epic:DevOpsInfra;type:Implementation;priority:P0;area:DevOps,Week 2
+E11-F5-I3,E11-F5-I3: Enable continuous delivery automation,"### Summary
+Enable continuous delivery automation. Automate deployments to staging/production with approvals, canary options, and rollback hooks. Integrate with Docker build artifacts (E11-F1-I3) and observability alerts (E11-F4-I3). Document deployment playbooks and incident rollback procedures.
+
+### Scope
+- [ ] Automate deployments to staging/production with approvals, canary options, and rollback hooks.
+- [ ] Integrate with Docker build artifacts (E11-F1-I3) and observability alerts (E11-F4-I3).
+- [ ] Document deployment playbooks and incident rollback procedures.
+
+### Acceptance Criteria
+- [ ] CRUD/API/Filament with RBAC
+- [ ] Tenant/brand scope enforced
+- [ ] Audit log entries
+- [ ] Indexes on foreign keys
+- [ ] Tests (happy + error paths)
+
+### Notes
+- tenant-scope, RBAC, audit-log
+- Observability: JSON logs + correlation-id
+- Dependencies: E11-F5-I2, E11-F1-I3, E11-F4-I3",epic:DevOpsInfra;type:Implementation;priority:P1;area:DevOps,Week 3
